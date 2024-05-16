@@ -1,0 +1,59 @@
+p=firstColumnTitle
+table
+  thead
+    tr
+      th(colspan='14', style='text-align: left;') Scale: #{scale} - Last refresh (server time): #{lastRefresh}
+    tr
+      th(style='width:  40px') Type of aggregation
+      th(style='width:  40px') Country
+      th(style='width: 100px') Measures' scope
+      th(style='width: 250px') ESA category
+      th(style='width: 250px') One-off type
+      th(style='width:  40px') Rev/Exp
+      th(style='width: 100px') EU transfers 
+      th(style='width: 100px') Recording convention 
+      - var i = 0
+        while i < yearsCount
+          th=(startYear + i++)
+  tbody
+    each indicator in indicators
+      - var isOO = indicator.aggregationType == 'OO'
+      tr
+        //- Type of aggregation
+        if isOO 
+          td Per one-off type
+        else
+          td Per ESA category 
+        //- Country
+        td=indicator.country
+        //- Measures' scope
+        if indicator.isOneOff 
+          td One-off measures
+        else 
+          td All fiscal policy measures 
+        //- ESA + OO
+        if isOO
+          td 
+          td=indicator.descr
+        else
+          td=indicator.descr 
+          td 
+        //- Rev/Exp
+        if indicator.isExpenditure 
+          td Exp 
+        else 
+          td Rev
+        //- EU transfer
+        if indicator.isEuFunded
+          td Incl. EU financed 
+        else 
+          td Excl. EU financed
+        //- Recording convention
+        if indicator.isTotalImpact 
+          td Total impact 
+        else 
+          td Additional impact 
+        //- years
+        each value in indicator.vector
+          td= value
+

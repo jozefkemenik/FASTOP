@@ -1,0 +1,479 @@
+version: '3'
+
+services:
+  gateway:
+    container_name: gateway
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - NODE_EXTRA_CA_CERTS=/workspace/services/gateway/config/ec.pem
+      - DEBUG=gateway
+    ports:
+      - "3100:3100"
+      - "3099:3099"
+    depends_on:
+      - "redis"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/gateway/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  da:
+    container_name: da
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=da
+      - FASTOP_DB=${FASTOP_DB}
+      - FASTOP_DB_PASSWORD=${FASTOP_DB_PASSWORD}
+      - UV_THREADPOOL_SIZE=10
+    ports:
+      - "3101:3101"
+    depends_on:
+      - "fastop_db"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/data-access/
+    volumes:
+      - ${FASTOP}/oracle/instantclient_19_15:/usr/lib/instantclient
+    command: bash -c "sleep 20 && npm run prod"
+
+#  sum:
+#    container_name: sum
+#    image: ecfin/ecfin_node_azure:1.5
+#    environment:
+#      - DEBUG=sum
+#      - SECUNDA_DB=${SECUNDA_DB}
+#      - SECUNDA_DB_PASSWORD=${SECUNDA_DB_PASSWORD}
+#      - LDAP_PORT=${LDAP_PORT}
+#      - $LDAP_PASS=${$LDAP_PASS}
+#      - UV_THREADPOOL_SIZE=3
+#    ports:
+#      - "3102:3102"
+#    networks:
+#      - scopax-network
+#    tty: true
+#    stdin_open: true
+#    working_dir: /workspace/services/sum/
+#    entrypoint:
+#      - npm
+#      - run
+#      - prod
+
+  dashboard:
+    container_name: dashboard
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=dashboard
+    ports:
+      - "3103:3103"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/dashboard/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  og:
+    container_name: og
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=og
+    ports:
+      - "3104:3104"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/output-gaps/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  cs:
+    container_name: cs
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=cs
+    ports:
+      - "3105:3105"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/country-status/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  wq:
+    container_name: wq
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=wq
+    ports:
+      - "3106:3106"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/web-queries/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  secunda:
+    container_name: secunda
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=secunda
+      - SECUNDA_UM=true
+    ports:
+      - "3107:3107"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/secunda/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+#  ed:
+#    container_name: ed
+#    image: ecfin/ecfin_node_azure:1.5
+#    environment:
+#      - DEBUG=ed
+#      - SPI_DB=${SPI_DB}
+#      - SPI_DB_PASSWORD=${SPI_DB_PASSWORD}
+#      - AMECO_DB_HOST=${AMECO_DB_HOST}
+#      - AMECO_DB_PASSWORD=${AMECO_DB_PASSWORD}
+#      - AMECO_ONLINE_DB_NAME=${AMECO_ONLINE_DB_NAME}
+#      - AMECO_ONLINE_DB_HOST=${AMECO_ONLINE_DB_HOST}
+#      - AMECO_ONLINE_DB_PASSWORD=${AMECO_ONLINE_DB_PASSWORD}
+#    ports:
+#      - "3108:3108"
+#    networks:
+#      - scopax-network
+#    tty: true
+#    stdin_open: true
+#    working_dir: /workspace/services/external-data/
+#    entrypoint:
+#      - npm
+#      - run
+#      - prod
+
+  task:
+    container_name: task
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=task
+    ports:
+      - "3110:3110"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/task/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  dfm:
+    container_name: dfm
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=dfm
+    ports:
+      - "3210:3210"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/dfm/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  drm:
+    container_name: drm
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=drm
+    ports:
+      - "3220:3220"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/drm/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  dbp:
+    container_name: dbp
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=dbp
+    ports:
+      - "3230:3230"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/dbp/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  scp:
+    container_name: scp
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=scp
+    ports:
+      - "3240:3240"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/scp/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+#  fgd:
+#    container_name: fgd
+#    image: ecfin/ecfin_node_azure:1.5
+#    environment:
+#      - DEBUG=fgd
+#    ports:
+#      - "3250:3250"
+#    networks:
+#      - scopax-network
+#    tty: true
+#    stdin_open: true
+#    working_dir: /workspace/services/fgd/
+#    entrypoint:
+#      - npm
+#      - run
+#      - prod
+
+  fdms:
+    container_name: fdms
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=fdms
+    ports:
+      - "3260:3260"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/fdms/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  fdmsie:
+    container_name: fdmsie
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=fdmsie
+    ports:
+      - "3261:3261"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/fdms/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  auxtools:
+    container_name: auxtools
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=auxtools
+    ports:
+      - "3270:3270"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/auxtools/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  ameco:
+    container_name: ameco
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=ameco
+    ports:
+      - "3280:3280"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/ameco/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  addin:
+    container_name: addin
+    image: ecfin/ecfin_node_azure:1.5
+    environment:
+      - DEBUG=auxtools
+    ports:
+      - "3271:3271"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/services/addin/
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+
+# python services
+
+  sdmx:
+    container_name: sdmx
+    image: ecfin/ecfin_python_azure:1.5
+    environment:
+      - DEBUG=sdmx
+    ports:
+      - "3501:3501"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/python/sdmx/
+    entrypoint:
+      - ./start-service.sh
+
+  eucam:
+    container_name: eucam
+    image: ecfin/ecfin_python_azure:1.5
+    environment:
+      - DEBUG=eucam
+    ports:
+      - "3502:3502"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/python/eucam/
+    entrypoint:
+      - ./start-service.sh
+
+  fdmsstar:
+    container_name: fdmsstar
+    image: ecfin/ecfin_python_azure:1.5
+    environment:
+      - DEBUG=fdmsstar
+    ports:
+      - "3503:3503"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/python/fdmsstar/
+    entrypoint:
+      - ./start-service.sh
+
+  hicp:
+    container_name: hicp
+    image: ecfin/ecfin_python_azure:1.5
+    environment:
+      - DEBUG=hicp
+    ports:
+      - "3504:3504"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/python/hicp/
+    entrypoint:
+      - ./start-service.sh
+
+  ad:
+    container_name: ad
+    image: ecfin/ecfin_python_azure:1.5
+    environment:
+      - DEBUG=ad
+    ports:
+      - "3505:3505"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/python/amecodownload/
+    entrypoint:
+      - ./start-service.sh
+
+  neer:
+    container_name: neer
+    image: ecfin/ecfin_python_azure:1.5
+    environment:
+      - DEBUG=neer
+    ports:
+      - "3507:3507"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/python/neer/
+    entrypoint:
+      - ./start-service.sh
+
+  fastop_db:
+    container_name: fastop_db
+    image: oracle/database:21.3.0-xe
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    tty: true
+    stdin_open: true
+    volumes:
+      - $ORADATA:/opt/oracle/oradata
+    networks:
+      - scopax-network
+
+  redis:
+    container_name: redis
+    image: redis
+    networks:
+      - scopax-network
+
+networks:
+  scopax-network:
+    driver: bridge

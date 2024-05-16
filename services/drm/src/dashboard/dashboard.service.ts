@@ -1,0 +1,39 @@
+import { EApps } from 'config'
+
+import { BIND_OUT, ISPOptions, NUMBER, STRING } from '../../../lib/dist/db'
+import { DataAccessApi } from '../../../lib/dist/api'
+import { DxmDashboardService } from '../../../lib/dist/dxm'
+
+export class DashboardService extends DxmDashboardService {
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////// Constructor ////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    constructor() {
+        super(EApps.DRM)
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////// Public Methods /////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**********************************************************************************************
+     * @method archiveCountry
+     *********************************************************************************************/
+    public async archiveCountry(countryId: string, roundSid: number): Promise<number> {
+        const options: ISPOptions = {
+            params: [
+                { name: 'p_round_sid', type: NUMBER, value: roundSid },
+                { name: 'p_country_id', type: STRING, value: countryId },
+                { name: 'o_res', type: NUMBER, dir: BIND_OUT },
+            ],
+        }
+        const dbResult = await DataAccessApi.execSP('drm_country_status.archiveCountryMeasures', options)
+        return  dbResult.o_res
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////// Private Methods ////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+}

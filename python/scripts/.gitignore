@@ -1,0 +1,7 @@
+*.?sv
+*.txt
+*.xlsx
+*.sql
+!covid_measures.xlsx
+!ameco_scale_mapping.csv
+out

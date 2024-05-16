@@ -1,0 +1,25 @@
+/* Formatted on 12/2/2019 18:41:35 (QP5 v5.252.13127.32847) */
+DROP TABLE GD_CTY_DEFAULT_LEVELS;
+
+CREATE TABLE GD_CTY_DEFAULT_LEVELS
+(
+   COUNTRY_ID   VARCHAR2 (4)
+                   NOT NULL
+                   CONSTRAINT GD_CTY_DEF_LEVELS_COUNTRY_FK
+                       REFERENCES GEO_AREAS (GEO_AREA_ID)
+,  LINE_SID     NUMBER (8)
+                   NOT NULL
+                   CONSTRAINT GD_CTY_DEF_LEVELS_LINE_FK
+                       REFERENCES GD_LINES (LINE_SID)
+,  COL_SID      NUMBER (8)
+                   NOT NULL
+                   CONSTRAINT GD_CTY_DEF_LEVELS_COL_FK
+                       REFERENCES GD_COLS (COL_SID)
+,  YEAR         NUMBER (4) NOT NULL
+,  VALUE        NUMBER
+,  CONSTRAINT GD_CTY_DEF_LEVELS_UNQ UNIQUE
+      (COUNTRY_ID
+,      LINE_SID
+,      COL_SID
+,      YEAR)
+);

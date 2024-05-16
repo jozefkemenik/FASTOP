@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "removeComments": true,
+        "baseUrl": ".",
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "lib": [
+            "dom",
+            "ES2020"
+        ],
+        "paths": {
+            "config": ["config/config"],
+            "cosnap": ["../shared/cosnap"],
+            "country-status": ["../shared/country-status"],
+            "fmr": ["../shared/fmr"],
+            "notification": ["../shared/notification"],
+            "output-gaps": ["../shared/output-gaps"],
+            "stats": ["../shared/stats"],
+            "task": ["../shared/task"],
+            "users": ["../shared/users"],
+        }
+    }
+}

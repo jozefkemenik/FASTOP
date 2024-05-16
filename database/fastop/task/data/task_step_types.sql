@@ -1,0 +1,13 @@
+/* Formatted on 07-07-2020 17:16:03 (QP5 v5.313) */
+SET DEFINE OFF;
+
+INSERT INTO TASK_STEP_TYPES(TASK_STEP_TYPE_ID, DESCR)
+     VALUES ('SAME_FREQ', 'Same frequency validation');
+
+INSERT INTO TASK_STEP_TYPES(TASK_STEP_TYPE_ID, DESCR)
+     VALUES ('CROSS_FREQ', 'Cross frequency validation');
+
+INSERT INTO TASK_STEP_TYPES(TASK_STEP_TYPE_ID, DESCR)
+     VALUES ('MISSING', 'Missing data validation');
+
+COMMIT;

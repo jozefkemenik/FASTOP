@@ -1,0 +1,23 @@
+{
+  "ignorePatterns": [
+    "dist", "node_modules", ".node_modules/*", ".dist/*", "static"
+  ],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "plugin:@nx/typescript"
+      ],
+      "rules": {
+      //  "max-len": ["error", { "code": 130 }],
+        "sort-imports": ["error", { "allowSeparatedGroups": true }],
+        "no-console": "error"
+      }
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {}
+    }
+  ]
+}

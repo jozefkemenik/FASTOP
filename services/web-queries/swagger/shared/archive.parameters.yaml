@@ -1,0 +1,81 @@
+components:
+  parameters:
+
+    roundSid_ArchParam:
+      name: roundSid
+      in: query
+      required: false
+      description: Round sid
+      schema:
+        type: number
+      allowEmptyValue: true
+
+    storageSid_ArchParam:
+      name: storageSid
+      in: query
+      required: false
+      description: Storage sid
+      schema:
+        type: number
+      allowEmptyValue: true
+
+    custTextSid_ArchParam:
+      name: custTextSid
+      in: query
+      required: false
+      description: Custom storage sid
+      schema:
+        type: number
+      allowEmptyValue: true
+
+    yearRound_ArchParam:
+      name: year
+      in: query
+      required: false
+      description: Round's year
+      schema:
+        type: number
+      allowEmptyValue: true
+
+    periodRound_ArchParam:
+      name: period
+      in: query
+      required: false
+      description: |
+        Round's period:
+        * `WIN` - winter
+        * `SPR` - spring
+        * `SUM` - summer
+        * `AUT` - autumn
+      schema:
+        type: string
+        enum: [WIN, SPR, SUM, AUT]
+      allowEmptyValue: true
+
+    versionRound_ArchParam:
+      name: version
+      in: query
+      required: false
+      description: |
+        Round's version.  
+        Used to retrieve custom round.
+      schema:
+        type: number
+      allowEmptyValue: true
+
+    storageRound_ArchParam:
+      name: storage
+      in: query
+      required: false
+      description: |
+        Storage:
+        * `TCE1` - TCE1
+        * `FIRST` - First storage
+        * `TCE3` - TCE3
+        * `SECOND` - Second storage
+        * `TCE5` - TCE5
+        * `FINAL` - Final storage
+      schema:
+        type: string
+        enum: [TCE1, FIRST, TCE3, SECOND, TCE5, FINAL]
+      allowEmptyValue: true

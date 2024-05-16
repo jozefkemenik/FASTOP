@@ -1,0 +1,15 @@
+-- build docker image:
+docker image build --build-arg http_proxy=$HTTP_PROXY --tag ecfin/ecfin_dev:0.0 .
+docker image build --build-arg http_proxy=$HTTP_PROXY --build-arg service=gateway --tag ecfin/gateway:0.0 -f prod/Dockerfile ../services/gateway
+
+-- run image:
+docker run -ti --name scopax -p 3000:3000 -e HOST_IP=10.136.101.145 -e http_proxy=$HTTP_PROXY -v //c/ECFIN-DEV/test/um-services:/workspace/code ecfin/ecfin_dev bash
+
+-- tag image:
+docker tag <srcImage:x.x> <destImage:x.x>
+
+-- push image to dockerhub
+docker push <image>
+
+-- run containers by docker-compose
+docker-compose up -d

@@ -1,0 +1,51 @@
+/* Formatted on 12/3/2019 16:12:59 (QP5 v5.252.13127.32847) */
+SET DEFINE OFF;
+
+DELETE FROM COUNTRY_GROUPS
+      WHERE COUNTRY_GROUP_ID = 'NEURO';
+
+DELETE FROM GEO_AREAS
+      WHERE GEO_AREA_ID = 'NEURO';
+
+
+INSERT INTO GEO_AREAS (GEO_AREA_ID
+,                      CODEISO3
+,                      DESCR
+,                      IS_DISPLAYED
+,                      IS_AMECO_REQUESTED
+,                      GEO_AREA_TYPE
+,                      ORDER_BY
+,                      AMECO_ORDER
+,                      CODE_FGD)
+     VALUES ('NEURO'
+,            'NEUR'
+,            'Countries not in euro area or ERM II'
+,            'N'
+,            'N'
+,            'COUNTRY_GROUP'
+,            9999
+,            NULL
+,            NULL);
+
+INSERT INTO COUNTRY_GROUPS (COUNTRY_GROUP_ID, COUNTRY_ID)
+     VALUES ('NEURO', 'BG');
+
+INSERT INTO COUNTRY_GROUPS (COUNTRY_GROUP_ID, COUNTRY_ID)
+     VALUES ('NEURO', 'HR');
+
+INSERT INTO COUNTRY_GROUPS (COUNTRY_GROUP_ID, COUNTRY_ID)
+     VALUES ('NEURO', 'CZ');
+
+INSERT INTO COUNTRY_GROUPS (COUNTRY_GROUP_ID, COUNTRY_ID)
+     VALUES ('NEURO', 'HU');
+
+INSERT INTO COUNTRY_GROUPS (COUNTRY_GROUP_ID, COUNTRY_ID)
+     VALUES ('NEURO', 'PL');
+
+INSERT INTO COUNTRY_GROUPS (COUNTRY_GROUP_ID, COUNTRY_ID)
+     VALUES ('NEURO', 'RO');
+
+INSERT INTO COUNTRY_GROUPS (COUNTRY_GROUP_ID, COUNTRY_ID)
+     VALUES ('NEURO', 'SE');
+
+COMMIT;

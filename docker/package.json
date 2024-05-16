@@ -1,0 +1,12 @@
+{
+  "name": "ecfin-utils",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "oracledb": "github:oracle/node-oracledb#v4.0.1"
+  }
+}

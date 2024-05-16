@@ -1,0 +1,252 @@
+version: '3'
+
+services:
+  gateway:
+    container_name: gateway
+    image: ecfin/ecfin_dev
+    environment:
+      - NODE_EXTRA_CA_CERTS=/workspace/code/gateway/config/ec.pem
+      - DEBUG=gateway
+    #  - NODE_DEBUG=request
+    #   - HOST_IP=10.136.101.145
+    #   - http_proxy=${HTTP_PROXY}
+    ports:
+      - "3100:3100"
+      - "3443:3443"
+    volumes:
+      - ../services:/workspace/code
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/gateway
+    entrypoint:
+      - npm
+      - start
+
+  dashboard:
+    container_name: dashboard
+    image: ecfin/ecfin_dev
+    environment:
+      - DEBUG=dashboard
+    ports:
+      - "3102:3102"
+    volumes:
+      - ../services:/workspace/code
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/dashboard
+    entrypoint:
+      - npm
+      - start
+
+  og:
+    container_name: og
+    image: ecfin/ecfin_dev
+    environment:
+      - DEBUG=og
+    ports:
+      - "3103:3103"
+    volumes:
+      - ../services:/workspace/code
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/output-gaps
+    entrypoint:
+      - npm
+      - start
+
+  dfm:
+    container_name: dfm
+    image: ecfin/ecfin_dev
+    environment:
+      - DEBUG=dfm
+    ports:
+      - "3001:3001"
+    volumes:
+      - ../services:/workspace/code
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/dfm
+    entrypoint:
+      - npm
+      - start
+
+  drm:
+    container_name: drm
+    image: ecfin/ecfin_dev
+    environment:
+      - DEBUG=drm
+    ports:
+      - "3002:3002"
+    volumes:
+      - ../services:/workspace/code
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/drm
+    entrypoint:
+      - npm
+      - start
+
+  dbp:
+    container_name: dbp
+    image: ecfin/ecfin_dev
+    environment:
+      - DEBUG=dbp
+    ports:
+      - "3003:3003"
+    volumes:
+      - ../services:/workspace/code
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/dbp
+    entrypoint:
+      - npm
+      - start
+
+  scp:
+    container_name: scp
+    image: ecfin/ecfin_dev
+    environment:
+      - DEBUG=scp
+    ports:
+      - "3004:3004"
+    volumes:
+      - ../services:/workspace/code
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/scp
+    entrypoint:
+      - npm
+      - start
+
+  fgd:
+    container_name: fgd
+    image: ecfin/ecfin_dev
+    environment:
+      - DEBUG=fgd
+    ports:
+      - "3005:3005"
+    volumes:
+      - ../services:/workspace/code
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/fgd
+    entrypoint:
+      - npm
+      - start
+
+  fdms:
+    container_name: fdms
+    image: ecfin/ecfin_dev
+    environment:
+      - DEBUG=fdms
+    ports:
+      - "3006:3006"
+    volumes:
+      - ../services:/workspace/code
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/fdms
+    entrypoint:
+      - npm
+      - start
+
+  auxtools:
+    container_name: auxtools
+    image: ecfin/ecfin_dev
+    environment:
+      - DEBUG=auxtools
+    ports:
+      - "3007:3007"
+    volumes:
+      - ../services:/workspace/code
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/auxtools
+    entrypoint:
+      - npm
+      - start
+
+  # um:
+  #   container_name: um
+  #   image: ecfin/ecfin_dev
+  #   environment:
+  #     - DEBUG=um
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ../services:/workspace/code
+  #   networks:
+  #     - scopax-network
+  #   tty: true
+  #   stdin_open: true
+  #   working_dir: /workspace/code/um
+  #   entrypoint:
+  #     - npm
+  #     - start
+
+  da:
+    container_name: da
+    image: ecfin/ecfin_dev
+    environment:
+      - DEBUG=da
+    ports:
+      - "3101:3101"
+    volumes:
+      - ../services:/workspace/code
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/data-access
+    # command: ["npm", "start"]
+    entrypoint:
+      - npm
+      - start
+
+  sum:
+    container_name: sum
+    image: ecfin/ecfin_dev
+    environment:
+      - DEBUG=sum
+    ports:
+      - "3280:3280"
+    volumes:
+      - ../services:/workspace/code
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/sum
+    entrypoint:
+      - npm
+      - start
+
+  redis:
+    container_name: redis
+    image: redis
+    networks:
+      - scopax-network
+
+networks:
+  scopax-network:
+    driver: bridge

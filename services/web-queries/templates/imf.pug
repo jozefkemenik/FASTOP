@@ -1,0 +1,22 @@
+table
+    thead
+        tr
+            th(colspan='14', style='text-align: left;') #{pageTitle} - Last refresh (server time): #{lastRefresh}
+        tr
+            th(style='width: 80px; text-align: left') Country
+            th(style='width: 80px; text-align: left') Indicator code
+            th(style='width: 150px; text-align: left') Indicator
+            th(style='width: 40px; text-align: left') Frequency
+            th(style='width: 40px; text-align: left') Scale
+            each period in imf.periods
+                th(style='width: 60px; text-align: left')=period
+    tbody
+        each ds in imf.dataSets
+            tr
+                td=ds.country
+                td=ds.indicatorId
+                td=ds.indicator
+                td=ds.freq
+                td=ds.scale
+                each period in imf.periods
+                    td=ds.series[period]

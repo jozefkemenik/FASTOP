@@ -1,0 +1,20 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "removeComments": true,
+        "outDir": "./dist",
+        "baseUrl": ".",
+        "declaration": true,
+        "paths": {
+            "measure": [
+                "../../shared/measure"
+            ],
+        }
+    },
+    "include": [
+        "src/**/*",
+    ],
+}

@@ -1,0 +1,31 @@
+#openapi: 3.0.3
+#info:
+#  title: 'DRM'
+#  version: 1.0.0
+
+tags:
+  - name: measures
+paths:
+
+  /measures:
+    get:
+      tags:
+        - measures
+      summary: DRM measures
+      description: |
+        Get DRM measures.    
+        Available only on intragate.
+      security:
+        - BasicAuth: []
+      parameters:
+        - $ref: '#/components/parameters/countryId_measuresParam'
+        - $ref: '#/components/parameters/gdp_measuresParam'
+        - $ref: '#/components/parameters/roundSid_ArchParam'
+
+      responses:
+        '200':
+          description: DRM measures in html table
+          content:
+            text/html:
+              schema:
+                type: string

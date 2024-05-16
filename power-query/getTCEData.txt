@@ -1,0 +1,12 @@
+// *** Use in: TCE data ***
+// *** Authorization: None ***
+// *** Example: getTCEData("xxx")
+
+let getTCEData=(ParametersNamedRange as text, optional archive as logical) =>
+
+let
+    archive_p  = if archive = true then true else false,
+    TceData = getData(ParametersNamedRange, "fdms/tce", archive_p, false)
+in
+    TceData
+in getTCEData

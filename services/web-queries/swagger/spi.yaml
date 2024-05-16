@@ -1,0 +1,337 @@
+#openapi: 3.0.3
+#info:
+#  title: 'SPI'
+#  version: 1.0.0
+
+tags:
+  - name: domain
+  - name: geo
+  - name: matrix
+paths:
+
+  /domain:
+    post:
+      tags:
+        - domain
+      summary: SPI domain data
+      description: |
+        Get SPI domain data.  
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/domain_spiParam'
+        - $ref: '#/components/parameters/indicator_spiParam'
+        - $ref: '#/components/parameters/country_spiParam'
+        - $ref: '#/components/parameters/year_spiParam'
+        - $ref: '#/components/parameters/startYear_spiParam'
+        - $ref: '#/components/parameters/endYear_spiParam'
+        - $ref: '#/components/parameters/nomenclature_spiParam'
+        - $ref: '#/components/parameters/nomenclatureCode_spiParam'
+        - $ref: '#/components/parameters/noNomenclatureCode_spiParam'
+        - $ref: '#/components/parameters/decimal_spiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/SpiResponse200'
+
+
+  /iqy/domain:
+    get:
+      tags:
+        - domain
+      summary: SPI excel web-query file (iqy) for domain data
+      description: |
+        Get SPI excel iqy file for domain data.  
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/domain_spiParam'
+        - $ref: '#/components/parameters/indicator_spiParam'
+        - $ref: '#/components/parameters/country_spiParam'
+        - $ref: '#/components/parameters/year_spiParam'
+        - $ref: '#/components/parameters/startYear_spiParam'
+        - $ref: '#/components/parameters/endYear_spiParam'
+        - $ref: '#/components/parameters/nomenclature_spiParam'
+        - $ref: '#/components/parameters/nomenclatureCode_spiParam'
+        - $ref: '#/components/parameters/noNomenclatureCode_spiParam'
+        - $ref: '#/components/parameters/decimal_spiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/SpiIqyResponse200'
+
+  /geo:
+    post:
+      tags:
+        - geo
+      summary: SPI geo data
+      description: |
+        Get SPI geo data.  
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/domain_spiParam'
+        - $ref: '#/components/parameters/indicator_spiParam'
+        - $ref: '#/components/parameters/country_spiParam'
+        - $ref: '#/components/parameters/year_spiParam'
+        - $ref: '#/components/parameters/startYear_spiParam'
+        - $ref: '#/components/parameters/endYear_spiParam'
+        - $ref: '#/components/parameters/nomenclature_spiParam'
+        - $ref: '#/components/parameters/nomenclatureCode_spiParam'
+        - $ref: '#/components/parameters/noNomenclatureCode_spiParam'
+        - $ref: '#/components/parameters/destor_spiParam'
+        - $ref: '#/components/parameters/decimal_spiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/SpiResponse200'
+
+
+  /iqy/geo:
+    get:
+      tags:
+        - geo
+      summary: SPI excel web-query file (iqy) for geo data
+      description: |
+        Get SPI excel iqy file for geo data.  
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/domain_spiParam'
+        - $ref: '#/components/parameters/indicator_spiParam'
+        - $ref: '#/components/parameters/country_spiParam'
+        - $ref: '#/components/parameters/year_spiParam'
+        - $ref: '#/components/parameters/startYear_spiParam'
+        - $ref: '#/components/parameters/endYear_spiParam'
+        - $ref: '#/components/parameters/nomenclature_spiParam'
+        - $ref: '#/components/parameters/nomenclatureCode_spiParam'
+        - $ref: '#/components/parameters/noNomenclatureCode_spiParam'
+        - $ref: '#/components/parameters/destor_spiParam'
+        - $ref: '#/components/parameters/decimal_spiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/SpiIqyResponse200'
+
+
+  /matrix:
+    post:
+      tags:
+        - matrix
+      summary: SPI matrix data
+      description: |
+        Get SPI matrix data.  
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/indicatorMatrix_spiParam'
+        - $ref: '#/components/parameters/country_spiParam'
+        - $ref: '#/components/parameters/year_spiParam'
+        - $ref: '#/components/parameters/industry_spiParam'
+        - $ref: '#/components/parameters/product_spiParam'
+        - $ref: '#/components/parameters/startYear_spiParam'
+        - $ref: '#/components/parameters/endYear_spiParam'
+        - $ref: '#/components/parameters/decimal_spiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/SpiResponse200'
+
+
+  /iqy/matrix:
+    get:
+      tags:
+        - matrix
+      summary: SPI excel web-query file (iqy) for matrix data
+      description: |
+        Get SPI excel iqy file for matrix data.  
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/indicatorMatrix_spiParam'
+        - $ref: '#/components/parameters/country_spiParam'
+        - $ref: '#/components/parameters/year_spiParam'
+        - $ref: '#/components/parameters/industry_spiParam'
+        - $ref: '#/components/parameters/product_spiParam'
+        - $ref: '#/components/parameters/startYear_spiParam'
+        - $ref: '#/components/parameters/endYear_spiParam'
+        - $ref: '#/components/parameters/decimal_spiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/SpiIqyResponse200'
+
+
+components:
+  parameters:
+
+    domain_spiParam:
+      name: domain
+      in: query
+      required: true
+      description: SPI domain
+      schema:
+        type: string
+        enum:
+          - structure
+          - competition
+          - country
+          - domestic
+          - external
+          - externalgeo
+          - knowledge
+          - skilltech
+          - trade
+          - tradegeo
+
+    indicator_spiParam:
+      name: indicator
+      in: query
+      required: true
+      description: Comma separated list of SPI indicators
+      schema:
+        type: string
+      example: vaknat,hours
+
+    country_spiParam:
+      name: country
+      in: query
+      required: true
+      description: Comma separated list of country codes
+      schema:
+        type: string
+      example: EU28,EU27,BE,BG,CZ,DK,DE,EE,IE,EL,ES,FR
+
+    year_spiParam:
+      name: year
+      in: query
+      required: false
+      description: Comma separated list of years to be returned
+      schema:
+        type: string
+      example: 2001,2002,2005,2008
+      allowEmptyValue: true
+
+    startYear_spiParam:
+      name: start_year
+      in: query
+      required: false
+      description: Beginning of the vector to be returned
+      schema:
+        type: number
+      example: 1999
+      allowEmptyValue: true
+
+    endYear_spiParam:
+      name: end_year
+      in: query
+      required: false
+      description: End of the vector to be returned
+      schema:
+        type: number
+      allowEmptyValue: true
+
+    nomenclature_spiParam:
+      name: nomenclature
+      in: query
+      required: false
+      description: SPI nomenclature
+      schema:
+        type: string
+        enum:
+          - BPM6
+          - NACE1
+          - NACE2
+          - CPA2002
+          - CPA2008
+          - BEC
+          - BPM5
+      example: NACE2
+
+    nomenclatureCode_spiParam:
+      name: nomenclature_code
+      in: query
+      required: false
+      description: SPI nomenclature code
+      schema:
+        type: string
+      example: TOTAL
+
+    noNomenclatureCode_spiParam:
+      name: noNomenclatureCode
+      in: query
+      required: false
+      description: If `true` then `nomenclature_code` is ignored.
+      schema:
+        type: boolean
+      allowEmptyValue: true
+
+    decimal_spiParam:
+      name: decimal
+      in: query
+      required: false
+      description: |
+        Precision:
+        * `None` - rounded to integer values
+        * `All` or empty or 0 - full precision
+        * any digit - number of digits after the decimal separator
+      schema:
+        type: string
+      example: 3
+      allowEmptyValue: true
+
+    destor_spiParam:
+      name: destor
+      in: query
+      required: false
+      description: Comma separated list of partner country codes
+      schema:
+        type: string
+      example: BE,PL,FR
+      allowEmptyValue: true
+
+    indicatorMatrix_spiParam:
+      name: indicator
+      in: query
+      required: true
+      description: SPI indicator
+      schema:
+        type: string
+      example: inpsh
+
+    industry_spiParam:
+      name: industry
+      in: query
+      required: false
+      description: Comma separated list of industry codes
+      schema:
+        type: string
+      example: A01,A02,A03,B,C10-C12
+      allowEmptyValue: true
+
+    product_spiParam:
+      name: product
+      in: query
+      required: false
+      description: Comma separated list of product codes
+      schema:
+        type: string
+      example: CPA_A01,CPA_A02,CPA_A03,CPA_B
+      allowEmptyValue: true
+
+
+  responses:
+    SpiResponse200:
+      description: SPI data
+      content:
+        text/html:
+          schema:
+            type: string
+
+    SpiIqyResponse200:
+      description: Iqy (excel web-query) file using POST request
+      content:
+        text/plain:
+          schema:
+            type: string
+            format: binary

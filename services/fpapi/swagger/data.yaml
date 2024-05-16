@@ -1,0 +1,234 @@
+#openapi: 3.0.3
+#info:
+#  title: 'FPAPI Data endpoint'
+#  version: 1.0.0
+
+tags:
+  - name: fpapi data (GET)
+  - name: fpapi data (POST)
+paths:
+
+  /data/{provider}/{dataset}/{query}:
+
+    get:
+      tags:
+        - fpapi data (GET)
+      summary: Fastop data API
+      description: |
+        Provide statistical data from various sdmx sources.      
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/provider_fpapiParam'
+        - $ref: '#/components/parameters/dataset_fpapiParam'
+        - $ref: '#/components/parameters/query_fpapiParam'
+        - $ref: '#/components/parameters/startPeriod_fpapiParam'
+        - $ref: '#/components/parameters/endPeriod_fpapiParam'
+        - $ref: '#/components/parameters/obsFlags_fpapiParam'
+        - $ref: '#/components/parameters/format_fpapiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpapiResponse200'
+        '400':
+          $ref: '#/components/responses/FpapiResponse400'
+        '500':
+          $ref: '#/components/responses/FpapiResponse500'
+
+  /data/{provider}/{dataset}:
+    post:
+      tags:
+        - fpapi data (POST)
+      summary: Fastop data API
+      description: |
+        Provide statistical data from various sdmx sources.      
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/provider_fpapiParam'
+        - $ref: '#/components/parameters/dataset_fpapiParam'
+        - $ref: '#/components/parameters/startPeriod_fpapiParam'
+        - $ref: '#/components/parameters/endPeriod_fpapiParam'
+        - $ref: '#/components/parameters/obsFlags_fpapiParam'
+        - $ref: '#/components/parameters/format_fpapiParam'
+
+      requestBody:
+        description: Sdmx query
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FpQueryBody'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpapiResponse200'
+        '400':
+          $ref: '#/components/responses/FpapiResponse400'
+        '500':
+          $ref: '#/components/responses/FpapiResponse500'
+
+
+components:
+  parameters:
+
+    provider_fpapiParam:
+      name: provider
+      in: path
+      required: true
+      description: | 
+        Data provider:
+        * `estat` - Eurostat
+        * `ecb` - ECB
+      schema:
+        type: string
+        enum: [estat, ecb]
+
+    dataset_fpapiParam:
+      name: dataset
+      in: path
+      required: true
+      description: Dataset code
+      example: lfsi_emp_a
+      schema:
+        type: string
+
+    query_fpapiParam:
+      name: query
+      in: path
+      required: true
+      description: Sdmx query
+      example: A.EMP_LFS.T.Y20-64.PC_POP.BE
+      schema:
+        type: string
+
+    startPeriod_fpapiParam:
+      name: startPeriod
+      in: query
+      required: false
+      description: |
+        Period from which the data should be retrieved:
+          * `YYYY` - annual, e.g. 1998
+          * `YYYY-S[1-2]` - semester, e.g. 1992-S1
+          * `YYYY-Q[1-4]` - quarter, e.g. 2010-Q3
+          * `YYYY-M[01-12] or YYYY-[01-12]` - monthly, e.g. 2001-M01, 2010-08
+          * `YYYY-[01-12]-[01-31]` - daily, e.g. 2023-07-30
+      schema:
+        type: string
+      example: 1999
+      allowEmptyValue: true
+
+    endPeriod_fpapiParam:
+      name: endPeriod
+      in: query
+      required: false
+      description: End period of the data that should be retrieved
+      schema:
+        type: string
+      allowEmptyValue: true
+
+    obsFlags_fpapiParam:
+      name: obsFlags
+      in: query
+      required: false
+      description: If `true` return observation flags
+      schema:
+        type: boolean
+        default: false
+      allowEmptyValue: true
+
+    format_fpapiParam:
+      name: format
+      in: query
+      required: false
+      description: | 
+        Output formats:
+        * `json` - json internal format
+        * `sdmx-csv` - csv format with sdmx header (list of dimensions)
+      schema:
+        type: string
+        default: json
+        enum: [json, sdmx-csv]
+      allowEmptyValue: true
+
+
+  schemas:
+
+    FpQueryBody:
+      type: object
+      properties:
+        query:
+          type: string
+          nullable: false
+          example: A.EMP_LFS.T.Y20-64.PC_POP.BE+FR+AT+PL
+
+    FpColumn:
+      type: object
+      properties:
+        label:
+          type: string
+        field:
+          type: string
+        observation:
+          type: boolean
+          nullable: true
+
+    FpapiData:
+      type: object
+      description: Sdmx data grouped by index (dimensions)
+      properties:
+        index:
+          type: array
+          example: ["A", "EMP_LFS", "T", "Y20-64", "PC_POP", "BE"]
+          items:
+            type: string
+        item:
+          description: key-value map where the key is the timestamp and value is the observation value
+          type: object
+          example: { "1230768000000.0": 67.1, "1262304000000.0": 67.6, "1483228800000.0": 68.5 }
+        flags:
+          description: key-value map where the key is the timestamp and value is the observation flag
+          type: object
+          example: { "1483228800000.0": "b" }
+
+    FpapiJsonData:
+      type: object
+      properties:
+        names:
+          type: array
+          example: [ "FREQ", "INDIC_EM", "SEX", "AGE", "UNIT", "GEO"]
+          items:
+            type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FpapiData'
+        freq:
+          type: string
+          example: A
+          description: |
+            Frequency of the data:
+            * `A` - annual
+            * `S` - semi-annual
+            * `Q` - quarterly
+            * `M` - monthly
+            * `D` - daily
+
+
+  responses:
+    FpapiResponse200:
+      description: API successful response. Type depends on `format` parameter.
+      content:
+        text/csv:
+          schema:
+            description: sdmx-csv
+            type: string
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FpapiJsonData'
+
+    FpapiResponse400:
+      description: Bad request (invalid parameters)
+
+    FpapiResponse500:
+      description: Internal error

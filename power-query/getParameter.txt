@@ -1,0 +1,15 @@
+// *** All templates ***
+// *** Provides generic way for getting input parameters using named range ***
+// *** Parameters:
+//     - NamedRange: excel name range
+//     - ColumnName: column header
+//     - combineList: if True then all values in the given columns are joined with comma are returned as single text value
+
+let GetParameter=(NamedRange as text, ColumnName as text, optional combineList as logical) =>
+let
+        table = Table.PromoteHeaders(Excel.CurrentWorkbook(){[Name=NamedRange]}[Content], [PromoteAllScalars=true]),
+        list = Table.Column(table, ColumnName),
+        value = if combineList = true then Text.Combine(list, ",") else Text.From(List.First(list, null))
+in
+	value
+in GetParameter

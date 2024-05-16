@@ -1,0 +1,10 @@
+export * from '../services/lib/dist/fisc/aggregates/shared-interfaces'
+export * from '../services/lib/dist/fisc/fiscal-parameters/shared-interfaces'
+export * from '../services/lib/dist/fisc/grid/shared-interfaces'
+export * from '../services/lib/dist/fisc/linked-tables/shared-interfaces'
+export * from '../services/lib/dist/fisc/linked-tables-templates/shared-interfaces'
+export * from '../services/lib/dist/fisc/output-gaps/shared-interfaces'
+export * from '../services/lib/dist/fisc/shared/calc/shared-interfaces'
+export * from '../services/lib/dist/fisc/shared/shared-interfaces'
+
+export * from '../services/lib/dist/measure/fisc-drm/guarantee/shared-interfaces'

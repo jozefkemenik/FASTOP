@@ -1,0 +1,109 @@
+#openapi: 3.0.3
+#info:
+#  title: 'Ameco sdmx endpoint'
+#  version: 1.0.0
+
+tags:
+  - name: ameco sdmx json
+paths:
+
+  /json/ameco/data:
+
+    get:
+      tags:
+        - ameco sdmx json
+      summary: Fastop API for ameco in sdmx style
+      description: |
+        Provide ameco data in json format.      
+        Available only on intragate.
+      security:
+        - BasicAuth: []
+      parameters:
+        - $ref: '#/components/parameters/dataset_amecoParam'
+        - $ref: '#/components/parameters/key_amecoParam'
+        - $ref: '#/components/parameters/startPeriod_amecoParam'
+        - $ref: '#/components/parameters/endPeriod_amecoParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/AmecoResponse200'
+        '403':
+          $ref: '#/components/responses/AmecoResponse403'
+        '404':
+          $ref: '#/components/responses/AmecoResponse404'
+        '500':
+          $ref: '#/components/responses/AmecoResponse500'
+
+components:
+  parameters:
+
+    dataset_amecoParam:
+      name: ds
+      in: query
+      required: true
+      description: | 
+        Dataset code. 
+        “restricted” requires authentication: user must send the user name + token, or acquire the IP based token in Fastop application.
+      example: current
+      schema:
+        type: string
+        enum: [current, public, restricted]
+
+    key_amecoParam:
+      name: key
+      in: query
+      required: true
+      description: Sdmx query
+      example: BEL,AUT,POL.NPTD,NPCN.1,6....A
+      schema:
+        type: string
+
+    startPeriod_amecoParam:
+      name: startPeriod
+      in: query
+      required: false
+      description:  First observation’s year of the serie to be retrieved. If not specified then the series starts from the first year stored (for forecast data it will be always 1960).
+      schema:
+        type: string
+      example: 1999
+      allowEmptyValue: true
+
+    endPeriod_amecoParam:
+      name: endPeriod
+      in: query
+      required: false
+      description: Last year to be retrieved. If not specified then it retrieves the serie until the current year.
+      schema:
+        type: string
+      allowEmptyValue: true
+
+  securitySchemes:
+    BasicAuth:
+      description: |
+        Provide ecas login and token.    
+        Token is generated on main Fastop page.  
+        You can also use IP-based token: on main Fastop page press the "IP" button and run your query.
+      type: http
+      scheme: basic
+
+  responses:
+    AmecoResponse200:
+      description: API successful response.
+      content:
+        application/json:
+          schema:
+            type: array
+            example: [ ["GEO","INDICATOR","TRN","AGG","UNIT","REF","FREQ","2010","2011","2012","2013"],["BEL","NPTD",1,0,0,0,"A","10137","10157","10181","10203"] ]
+
+    AmecoResponse403:
+      description: User not authorized
+
+    AmecoResponse404:
+      description: Invalid request (when intragate only service is accessed via webgate)
+
+    AmecoResponse500:
+      description: Internal error
+
+
+
+

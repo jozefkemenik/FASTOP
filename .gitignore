@@ -1,0 +1,17 @@
+*.js.map
+node_modules
+dist
+services/gateway/static/*
+!services/gateway/static/*.html
+.vscode
+.idea
+/services/dfm/upload/
+/services/drm/upload/
+.venv
+__pycache__
+.nyc_output
+mocha.json
+.pytest_cache
+package-lock.json
+.venv311
+.nx

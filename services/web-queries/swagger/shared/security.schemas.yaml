@@ -1,0 +1,9 @@
+components:
+  securitySchemes:
+    BasicAuth:
+      description: |
+        Provide ecas login and token.    
+        Token is generated on main Fastop page.  
+        You can also use IP-based token: on main Fastop page press the "IP" button and run your query.
+      type: http
+      scheme: basic

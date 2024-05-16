@@ -1,0 +1,94 @@
+SET DEFINE OFF;
+ALTER TABLE ROUNDS DISABLE ALL TRIGGERS;
+
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (18, 2011, 3, 'AUT 2011');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (6, 2012, 3, 'AUT 2012');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (1, 2012, 1, 'SPR 2012');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (2, 2013, 1, 'SPR 2013');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (4, 2013, 3, 'AUT 2013');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (34, 2014, 3, 'AUT 2014');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (3, 2014, 1, 'SPR 2014');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (44, 2015, 4, 'WIN 2015');
+-- Insert into ROUNDS
+--    (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+--  Values
+--    (5, 2015, 1, 'SPR 2015'); CST - not used anywhere
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (52, 2015, 3, 'AUT 2015');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (49, 2015, 1, 'SPR 2015');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (55, 2016, 4, 'WIN 2016');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (60, 2016, 1, 'SPR 2016');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (63, 2016, 3, 'AUT 2016');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (74, 2017, 1, 'SPR 2017');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (70, 2017, 4, 'WIN 2017');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (78, 2017, 3, 'AUT 2017');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (87, 2018, 1, 'SPR 2018');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (89, 2018, 3, 'AUT 2018');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (94, 2019, 1, 'SPR 2019');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (97, 2019, 3, 'AUT 2019');
+Insert into ROUNDS
+   (ROUND_SID, YEAR, PERIOD_SID, DESCR)
+ Values
+   (104, 2020, 1, 'SPR 2020');
+COMMIT;
+
+ALTER TABLE ROUNDS ENABLE ALL TRIGGERS;

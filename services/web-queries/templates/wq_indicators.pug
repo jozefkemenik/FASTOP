@@ -1,0 +1,56 @@
+mixin legendInfo
+    tr
+        th(colspan='14', style='text-align: left;')
+            table
+                tr
+                    if legends
+                        each legend in legends
+                            th #{legend.name}:
+                            th=legend.value
+                    th(colspan='2') Last refresh (server time):
+                    th(colspan='3')=lastRefresh
+                    th(colspan='5') <span style="color:red">#{error}</span>
+
+
+mixin tableCell(col, data)
+    if col.observation
+        if (typeof data[col.field] !== 'undefined')
+            td(formula='=+' + data[col.field])=data[col.field]
+        else if (nullValue !== '')
+            td=nullValue
+        else
+            td(formula='=NA()')
+    else
+        td=data[col.field]
+
+
+
+table
+    thead
+        if legendPosition === 1
+            +legendInfo
+        tr
+            if transpose
+                th=indicators.columns[0].label
+                    each row in indicators.data
+                        th=row[indicators.columns[0].field]
+            else
+                each col in indicators.columns
+                    th=col.label
+    tbody
+
+        if transpose
+            each col, index in indicators.columns
+                if index > 0
+                    tr
+                        td=col.label
+                        each data in indicators.data
+                            +tableCell(col, data)
+        else
+            each data in indicators.data
+                tr
+                    each col in indicators.columns
+                        +tableCell(col, data)
+
+        if legendPosition === 2
+            +legendInfo

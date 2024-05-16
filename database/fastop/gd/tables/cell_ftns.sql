@@ -1,0 +1,14 @@
+/* Formatted on 12/3/2019 15:30:29 (QP5 v5.252.13127.32847) */
+DROP TABLE GD_CELL_FTNS CASCADE CONSTRAINTS;
+
+CREATE TABLE GD_CELL_FTNS
+(
+   FOOTNOTE_SID   NUMBER (8)
+                     NOT NULL
+                     CONSTRAINT GD_CELL_FTNS_FOOTNOTE_FK
+                         REFERENCES GD_FOOTNOTES (FOOTNOTE_SID)
+,  CELL_SID       NUMBER (8)
+                     NOT NULL
+                     CONSTRAINT GD_CELL_FTNS_CELL_FK
+                         REFERENCES GD_CELLS (CELL_SID)
+);

@@ -1,0 +1,111 @@
+#openapi: 3.0.3
+#info:
+#  title: 'SDMX'
+#  version: 1.0.0
+
+tags:
+  - name: ecb
+  - name: estat
+paths:
+
+  /ecb/data:
+    get:
+      tags:
+        - ecb
+      summary: European Central Bank
+      description: |
+        Get ECB data via sdmx endpoint.      
+        Available only on intragate.
+      security: []
+      parameters:
+        - allOf:
+            - $ref: '#/components/parameters/dataSource_sdmxParam'
+            - description: ECB datasource name
+            - example: BSI
+        - allOf:
+            - $ref: '#/components/parameters/queryKey_sdmxParam'
+            - example: M.AT.N.A.L60.X.4.Z5.0000.Z01.E
+        - $ref: '#/components/parameters/startPeriod_sdmxParam'
+        - $ref: '#/components/parameters/endPeriod_sdmxParam'
+        - $ref: '#/components/parameters/labels_sdmxParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+
+
+  /estat/data:
+    get:
+      tags:
+        - estat
+      summary: Eurostat
+      description: |
+        Get Eurostat data via sdmx endpoint.      
+        Available only on intragate.
+      security: []
+      parameters:
+        - allOf:
+            - $ref: '#/components/parameters/dataSource_sdmxParam'
+            - description: Eurostat datasource name
+            - example: namq_10_gdp
+        - allOf:
+            - $ref: '#/components/parameters/queryKey_sdmxParam'
+            - example: Q.CP_MNAC.NSA..AT+FR
+        - $ref: '#/components/parameters/startPeriod_sdmxParam'
+        - $ref: '#/components/parameters/endPeriod_sdmxParam'
+        - $ref: '#/components/parameters/labels_sdmxParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+
+
+components:
+  parameters:
+
+    dataSource_sdmxParam:
+      name: ds
+      in: query
+      required: true
+      description: Datasource name
+      schema:
+        type: string
+
+    queryKey_sdmxParam:
+      name: key
+      in: query
+      required: true
+      description: Sdmx query key
+      schema:
+        type: string
+
+    startPeriod_sdmxParam:
+      name: startPeriod
+      in: query
+      required: false
+      description: Year from which the data should be retrieved
+      schema:
+        type: number
+      example: 1999
+      allowEmptyValue: true
+
+    endPeriod_sdmxParam:
+      name: endPeriod
+      in: query
+      required: false
+      description: End year of the data that should be retrieved
+      schema:
+        type: number
+      allowEmptyValue: true
+
+    labels_sdmxParam:
+      name: labels
+      in: query
+      required: false
+      description: If `true` return descriptions, otherwise only codes
+      schema:
+        type: boolean
+        default: false
+      allowEmptyValue: true

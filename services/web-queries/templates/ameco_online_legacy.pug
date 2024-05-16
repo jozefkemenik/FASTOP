@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+html
+    head
+        meta(charset='UTF-8')
+        title Ameco #{amecoType}
+    body
+        table
+            thead
+                tr
+                    each col in columns
+                        th=col.label
+            tbody
+                each row in data
+                    tr
+                        each col in columns
+                            if col.formula
+                                if row[col.field]
+                                    td(formula='=+' + row[col.field])=row[col.field]
+                                else
+                                    td(formula='=NA()')
+                            else
+                                td=row[col.field]
+

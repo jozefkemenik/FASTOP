@@ -1,0 +1,7 @@
+SET DEFINE OFF;
+
+INSERT INTO HELP_MSG_TYPE (HELP_MSG_TYPE_ID, DESCR) VALUES ( 'LINE', 'Help message for grid line');
+INSERT INTO HELP_MSG_TYPE (HELP_MSG_TYPE_ID, DESCR) VALUES ( 'COLUMN', 'Help message for grid column');
+INSERT INTO HELP_MSG_TYPE (HELP_MSG_TYPE_ID, DESCR) VALUES ( 'GRID', 'Help message for grid');
+
+COMMIT;

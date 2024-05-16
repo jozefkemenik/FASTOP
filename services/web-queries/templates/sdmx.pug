@@ -1,0 +1,18 @@
+table
+  thead
+    tr
+      th(colspan='14', style='text-align: left;') #{title} - last refresh (server time): #{lastRefresh}
+    tr
+      each col in sdmx.columns
+        th(style='width: 140px')=col.label
+  tbody
+    each data in sdmx.data
+      tr
+        each col in sdmx.columns
+          if col.observation
+            if (typeof data[col.field] !== 'undefined')
+              td(formula='=+' + data[col.field])=data[col.field]
+            else
+              td(formula='=NA()')
+          else
+            td=data[col.field]

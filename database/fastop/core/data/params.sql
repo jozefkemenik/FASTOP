@@ -1,0 +1,24 @@
+/* Formatted on 26-08-2020 13:58:04 (QP5 v5.313) */
+SET DEFINE OFF;
+
+INSERT INTO PARAMS(PARAM_ID, DESCR, LONG_DESCR, VALUE)
+     VALUES ('CURRENT_ROUND', 'Current forecast round', NULL, '104');
+
+INSERT INTO PARAMS(PARAM_ID, DESCR, VALUE)
+   SELECT 'CURRENT_STORAGE', 'current storage sid', STORAGE_SID
+     FROM STORAGES
+    WHERE STORAGE_ID = 'FINAL';
+
+INSERT INTO PARAMS(PARAM_ID, DESCR, LONG_DESCR, VALUE)
+    VALUES ('HICP_ANOM_START', 'HICP anomalies calculation start year', NULL, '2010');
+
+INSERT INTO PARAMS(PARAM_ID, DESCR, LONG_DESCR, VALUE)
+    VALUES ('HICP_ANOM_END', 'HICP anomalies calculation end year', NULL, '2019');
+
+INSERT INTO PARAMS(PARAM_ID, DESCR, LONG_DESCR, VALUE)
+    VALUES ('FASTOP_HELP_URL', 'Fastop wiki', NULL, 'https://www.cc.cec/wikis/display/ecfin/FASTOP+-+fdmsstar%2C+scopax%2C+add-in');
+
+INSERT INTO PARAMS(PARAM_ID, DESCR, LONG_DESCR, VALUE)
+    VALUES ('EER_BASE_YEAR', 'Neer/Reer calculation base year', NULL, '2015');
+
+COMMIT;

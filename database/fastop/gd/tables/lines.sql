@@ -1,0 +1,77 @@
+/* Formatted on 12/3/2019 12:46:03 (QP5 v5.252.13127.32847) */
+ALTER TABLE GD_LINES
+   DROP PRIMARY KEY CASCADE;
+
+DROP TABLE GD_LINES CASCADE CONSTRAINTS;
+DROP SEQUENCE GD_LINES_SID_SEQ;
+
+CREATE TABLE GD_LINES
+(
+   LINE_SID                 NUMBER (8) CONSTRAINT GD_LINES_PK PRIMARY KEY
+,  LINE_TYPE_SID            NUMBER (8)
+                               NOT NULL
+                               CONSTRAINT GD_LINES_LINE_TYPE_FK
+                                   REFERENCES GD_LINE_TYPES (LINE_TYPE_SID)
+,  DESCR                    VARCHAR2 (100 BYTE)
+,  ESA_CODE                 VARCHAR2 (50 BYTE)
+,  HELP_MSG_SID             NUMBER (12)
+                               CONSTRAINT GD_LINES_HELP_MSG_FK
+                                   REFERENCES HELP_MSGS (HELP_MSG_SID)
+,  RATS_ID                  VARCHAR2 (20 BYTE)
+,  LINE_ID                  VARCHAR2 (10 BYTE)
+,  EB_ID                    VARCHAR2 (20 BYTE)
+,  IN_AGG                   VARCHAR2 (1 BYTE)
+,  IN_LT                    VARCHAR2 (1 BYTE)
+,  IS_MANDATORY             NUMBER (1)
+,  MANDATORY_CTY_GROUP_ID   VARCHAR2 (5 BYTE)
+                               CONSTRAINT GD_LINES_CTY_GROUP_FK
+                                   REFERENCES GEO_AREAS (GEO_AREA_ID)
+,  INDICATOR_ID             VARCHAR2 (20 BYTE)
+                               CONSTRAINT GD_LINES_INDICATOR_FK
+                                   REFERENCES INDICATORS (INDICATOR_ID)
+,  WEIGHT                   VARCHAR2 (3 BYTE)
+,  WEIGHT_YEAR              NUMBER (1)
+                               DEFAULT 0
+                               CONSTRAINT WEIGHT_YEAR_CHECK CHECK
+                                  (WEIGHT_YEAR IN (0, -1))
+,  IN_DD                    VARCHAR2 (1 BYTE)
+,  AGG_DESCR                VARCHAR2 (500 BYTE)
+,  CALC_RULE                VARCHAR2 (500 BYTE)
+,  COPY_LINE_RULE           VARCHAR2 (500 BYTE)
+);
+
+CREATE SEQUENCE GD_LINES_SID_SEQ START WITH 1;
+/
+CREATE OR REPLACE TRIGGER GD_LINES_TRG
+   BEFORE INSERT
+   ON GD_LINES
+   FOR EACH ROW
+BEGIN
+   SELECT GD_LINES_SID_SEQ.NEXTVAL INTO :NEW.LINE_SID FROM DUAL;
+END;
+/
+CREATE INDEX GD_LINES_ID_IDX
+   ON GD_LINES (LINE_ID);
+/
+COMMENT ON TABLE GD_LINES IS 'Lines';
+COMMENT ON COLUMN GD_LINES.LINE_SID IS 'Line SID';
+COMMENT ON COLUMN GD_LINES.LINE_TYPE_SID IS 'Line type';
+COMMENT ON COLUMN GD_LINES.DESCR IS 'Description';
+COMMENT ON COLUMN GD_LINES.ESA_CODE IS 'ESA code';
+COMMENT ON COLUMN GD_LINES.HELP_MSG_SID IS 'Help message';
+COMMENT ON COLUMN GD_LINES.RATS_ID IS 'RATS identifier';
+COMMENT ON COLUMN GD_LINES.LINE_ID IS 'Line ID';
+COMMENT ON COLUMN GD_LINES.EB_ID IS 'Expenditure Benchmark code';
+COMMENT ON COLUMN GD_LINES.IN_AGG IS 'used in aggregate tables';
+COMMENT ON COLUMN GD_LINES.IN_LT IS 'used in Linked tables';
+COMMENT ON COLUMN GD_LINES.IS_MANDATORY IS 'Mandatory variable';
+COMMENT ON COLUMN GD_LINES.MANDATORY_CTY_GROUP_ID IS
+   'Country group for which this line is mandatory';
+COMMENT ON COLUMN GD_LINES.INDICATOR_ID IS 'Indicator ID';
+COMMENT ON COLUMN GD_LINES.WEIGHT IS 'Weighting factor for Aggregates';
+COMMENT ON COLUMN GD_LINES.WEIGHT_YEAR IS
+   'Usage year of Weight for Aggregates';
+COMMENT ON COLUMN GD_LINES.IN_DD IS 'Used by Debt Dynamics';
+COMMENT ON COLUMN GD_LINES.AGG_DESCR IS 'Description in Aggregates';
+COMMENT ON COLUMN GD_LINES.CALC_RULE IS 'Calculation Rule';
+/

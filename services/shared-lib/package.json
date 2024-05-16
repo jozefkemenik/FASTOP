@@ -1,0 +1,12 @@
+{
+    "name": "services-shared-lib",
+    "version": "0.0.0",
+    "description": "services shared library",
+    "scripts": {
+        "prebuild:prelib": "../node_modules/.bin/del-cli ./dist/prelib/*",
+        "build:prelib": "../node_modules/.bin/tsc --outDir ./dist/prelib -d src/prelib/*.ts",
+        "prebuild": "../node_modules/.bin/eslint . && ../node_modules/.bin/del-cli ./dist/*",
+        "build": "../node_modules/.bin/tsc",
+        "test": "../node_modules/.bin/mocha --require ts-node/register **/*.spec.ts"
+    }
+}

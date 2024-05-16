@@ -1,0 +1,62 @@
+#openapi: 3.0.3
+#info:
+#  title: 'IMF'
+#  version: 1.0.0
+
+tags:
+  - name: web-query
+paths:
+
+  /:
+    get:
+      tags:
+        - web-query
+      summary: Get IMF data
+      description: |
+        Get IMF data as html table.   
+        Available only on intragate.
+      security: []
+      parameters:
+
+        - name: ds
+          in: query
+          required: true
+          description: Name of the IMF datasource
+          schema:
+            type: string
+          example: IFS
+
+        - name: key
+          in: query
+          required: true
+          description: Search key in sdmx format
+          schema:
+            type: string
+          example: "M.FR,AT,BE.FDSAF_EUR,FASAG_EUR"
+
+        - name: startPeriod
+          in: query
+          required: true
+          description: Year from which the data should be retrieved
+          schema:
+            type: number
+          example: 1995
+
+        - name: endPeriod
+          in: query
+          required: true
+          description: End year of the data that should be retrieved
+          schema:
+            type: number
+          example: 2020
+
+      responses:
+        '200':
+          description: IMF indicators data
+          content:
+            text/html:
+              schema:
+                type: string
+
+
+

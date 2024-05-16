@@ -1,0 +1,428 @@
+#openapi: 3.0.3
+#info:
+#  title: 'FDMS'
+#  version: 1.0.0
+
+tags:
+  - name: forecast
+  - name: fdms input data
+paths:
+
+  /forecast:
+    get:
+      tags:
+        - forecast
+      summary: Get forecast data
+      description: |
+        Get forecast data.  
+        Current data is restricted, once the forecast is published the data becomes public.  
+        Available only on intragate.
+      security:
+        - BasicAuth: []
+      parameters:
+        - allOf:
+          - $ref: '#/components/parameters/seriesParam_fpapiParam'
+          - example: CCVGE.1.0.0.0,OVGDT.1.0.0.0
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/yearRound_ArchParam'
+        - $ref: '#/components/parameters/periodRound_ArchParam'
+        - $ref: '#/components/parameters/storageRound_ArchParam'
+        - $ref: '#/components/parameters/versionRound_ArchParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '403':
+          $ref: '#/components/responses/FpResponse403'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  /forecast/latestAvailable:
+    get:
+      tags:
+        - forecast
+      summary: Get latest available forecast data
+      description: |
+        Get latest available forecast data.  
+        Latest available round and storage are set when ameco transfer files are sent.  
+        Available only on intragate.
+      security:
+        - BasicAuth: []
+      parameters:
+        - allOf:
+          - $ref: '#/components/parameters/seriesParam_fpapiParam'
+          - example: CCVGE.1.0.0.0,OVGDT.1.0.0.0
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/yearRound_ArchParam'
+        - $ref: '#/components/parameters/periodRound_ArchParam'
+        - $ref: '#/components/parameters/storageRound_ArchParam'
+        - $ref: '#/components/parameters/versionRound_ArchParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '403':
+          $ref: '#/components/responses/FpResponse403'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  /forecastAmeco:
+    get:
+      tags:
+        - forecast
+      summary: Get forecast data combined with ameco current
+      description: |
+        Indicators not available in forecast will be taken from ameco current.  
+        Available only on intragate.
+      security:
+        - BasicAuth: []
+      parameters:
+        - allOf:
+          - $ref: '#/components/parameters/seriesParam_fpapiParam'
+          - example: CCVGE.1.0.0.0,UINP.1.0.99.0,FWT2.1.0.0.0
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/yearRound_ArchParam'
+        - $ref: '#/components/parameters/periodRound_ArchParam'
+        - $ref: '#/components/parameters/storageRound_ArchParam'
+        - $ref: '#/components/parameters/versionRound_ArchParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '403':
+          $ref: '#/components/responses/FpResponse403'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  /tce:
+    get:
+      tags:
+        - forecast
+      summary: TCE results data
+      description: |
+        TCE results calculated in FDMS.        
+        Available only on intragate.
+      security: []
+      parameters:
+        - allOf:
+          - $ref: '#/components/parameters/seriesParam_fpapiParam'
+          - example: PMGN.6.0.0.0,OXGN.6.0.30.0
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/yearRound_ArchParam'
+        - $ref: '#/components/parameters/periodRound_ArchParam'
+        - $ref: '#/components/parameters/storageRound_ArchParam'
+        - $ref: '#/components/parameters/versionRound_ArchParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '403':
+          $ref: '#/components/responses/FpResponse403'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  /amecoHistorical:
+    get:
+      tags:
+        - fdms input data
+      summary: Ameco historical
+      description: |
+        Ameco historical data uploaded in FDMS.  
+        Available only on intragate.
+      security: []
+      parameters:
+        - allOf:
+          - $ref: '#/components/parameters/seriesParam_fpapiParam'
+          - example: NETD.1.0.0.0,AVGDGP.1.0.0.0
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/yearRound_ArchParam'
+        - $ref: '#/components/parameters/periodRound_ArchParam'
+        - $ref: '#/components/parameters/storageRound_ArchParam'
+        - $ref: '#/components/parameters/versionRound_ArchParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '403':
+          $ref: '#/components/responses/FpResponse403'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  /b1:
+    get:
+      tags:
+        - fdms input data
+      summary: B1 indicators
+      description: |
+        B1 data uploaded in FDMS.  
+        Available only on intragate.
+      security: []
+      parameters:
+        - allOf:
+          - $ref: '#/components/parameters/seriesParam_fpapiParam'
+          - example: UBIKBOPB1.1.0.0.0,ZHPIB1.1.0.0.0,UTLDINFB1.1.0.0.0,UTLDIHNB1.1.0.0.0
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/yearRound_ArchParam'
+        - $ref: '#/components/parameters/periodRound_ArchParam'
+        - $ref: '#/components/parameters/storageRound_ArchParam'
+        - $ref: '#/components/parameters/versionRound_ArchParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '403':
+          $ref: '#/components/responses/FpResponse403'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  /estatAnnual:
+    get:
+      tags:
+        - fdms input data
+      summary: Eurostat annual data
+      description: |
+        Eurostat annual data retrieved from Eurostat.    
+        Available only on intragate.
+      security: []
+      parameters:
+        - allOf:
+          - $ref: '#/components/parameters/seriesParam_fpapiParam'
+          - example: UD76PAYS13.1.0.0.0
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/yearRound_ArchParam'
+        - $ref: '#/components/parameters/periodRound_ArchParam'
+        - $ref: '#/components/parameters/storageRound_ArchParam'
+        - $ref: '#/components/parameters/versionRound_ArchParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '403':
+          $ref: '#/components/responses/FpResponse403'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  /estatQuarterly:
+    get:
+      tags:
+        - fdms input data
+      summary: Eurostat quarterly data
+      description: |
+        Eurostat quarterly data retrieved from Eurostat.    
+        Available only on intragate.
+      security: []
+      parameters:
+        - allOf:
+          - $ref: '#/components/parameters/seriesParam_fpapiParam'
+          - example: OCPH.1.0.0.0
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - allOf:
+          - $ref: '#/components/parameters/freq_fpapiParam'
+          - example: Q
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/yearRound_ArchParam'
+        - $ref: '#/components/parameters/periodRound_ArchParam'
+        - $ref: '#/components/parameters/storageRound_ArchParam'
+        - $ref: '#/components/parameters/versionRound_ArchParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '403':
+          $ref: '#/components/responses/FpResponse403'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  /estatMonthly:
+    get:
+      tags:
+        - fdms input data
+      summary: Eurostat monthly data
+      description: |
+        Eurostat monthly data retrieved from Eurostat.    
+        Available only on intragate.
+      security: []
+      parameters:
+        - allOf:
+          - $ref: '#/components/parameters/seriesParam_fpapiParam'
+          - example: ZCPIENG.1.0.0.0
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - allOf:
+          - $ref: '#/components/parameters/freq_fpapiParam'
+          - example: M
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/yearRound_ArchParam'
+        - $ref: '#/components/parameters/periodRound_ArchParam'
+        - $ref: '#/components/parameters/storageRound_ArchParam'
+        - $ref: '#/components/parameters/versionRound_ArchParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '403':
+          $ref: '#/components/responses/FpResponse403'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  /irates:
+    get:
+      tags:
+        - fdms input data
+      summary: Interest rates data
+      description: |
+        Interest rates data uploaded in FDMS.      
+        Available only on intragate.
+      security: []
+      parameters:
+        - allOf:
+          - $ref: '#/components/parameters/seriesParam_fpapiParam'
+          - example: ISN.1.1.0.0
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/yearRound_ArchParam'
+        - $ref: '#/components/parameters/periodRound_ArchParam'
+        - $ref: '#/components/parameters/storageRound_ArchParam'
+        - $ref: '#/components/parameters/versionRound_ArchParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '403':
+          $ref: '#/components/responses/FpResponse403'
+        '404':
+          $ref: '#/components/responses/FpResponse404'

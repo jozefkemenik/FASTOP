@@ -1,0 +1,12 @@
+DECLARE
+    CURSOR c_data IS 
+        SELECT * FROM FGD_CFG_CHOICES_CONDITIONS;
+BEGIN
+    FOR rec IN c_data LOOP
+        INSERT INTO CFG_CHOICES_CONDITIONS(LOV_SID, COND_LOV_SID)
+        VALUES (get_lov_sid(rec.LOV_SID),get_lov_sid(rec.COND_LOV_SID));
+    END LOOP;
+EXCEPTION
+    WHEN OTHERS THEN
+        LOG_FAIL('CFG_CHOICES_CONDITIONS', sysdate, sqlerrm(), -1);
+END;

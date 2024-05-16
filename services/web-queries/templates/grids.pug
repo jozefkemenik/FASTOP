@@ -1,0 +1,12 @@
+table
+  thead
+    tr
+      th(colspan='14', style='text-align: left;') Last refresh (server time): #{lastRefresh}
+    tr
+      each header in headers
+        th= header
+  tbody
+    each row in rows
+      tr
+        each cell in row
+          td= cell

@@ -1,0 +1,13 @@
+components:
+  parameters:
+
+    ctyVersion_gridsParam:
+      name: ctyVersion
+      in: query
+      required: false
+      description: Country version
+      schema:
+        type: number
+      allowEmptyValue: true
+
+

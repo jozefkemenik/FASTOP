@@ -1,0 +1,1 @@
+export type HelpMsgType = 'LINE' | 'COLUMN' | 'GRID'

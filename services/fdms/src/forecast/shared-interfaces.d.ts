@@ -1,0 +1,4 @@
+export const enum ForecastType {
+    LATEST_FULLY_FLEDGED = 'LATEST_FULLY_FLEDGED',
+    LATEST_AGGREGATES = 'LATEST_AGGREGATES'
+}

@@ -1,0 +1,9 @@
+/* Formatted on 20-02-2020 15:03:01 (QP5 v5.313) */
+INSERT INTO DRM_CTY_SCALES(COUNTRY_ID, SCALE_SID)
+    SELECT country_id, scale_sid
+      FROM DRM_ARCHIVED_CTY_SCALES S
+     WHERE S.ROUND_SID = (SELECT MAX(ROUND_SID)
+                            FROM DRM_ARCHIVED_CTY_SCALES I
+                           WHERE I.COUNTRY_ID = S.COUNTRY_ID);
+
+COMMIT;

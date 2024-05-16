@@ -1,0 +1,42 @@
+table
+    thead
+        tr
+            th(colspan='3' style='text-align: left;') #{pageTitle}
+        tr
+            - var yearsSpan = 8 - (spi.noNomenclatureCode ? 2 : 0) - (!spi.partner ? 2 : 0);
+            th(colspan=yearsSpan, rowspan='1' style='text-align: left; color: #000099') Years
+            each year in spi.years
+                th(style='text-align: left; color: #000099')=year
+        tr
+            th(colspan='2', style='text-align: left; color: #000099') Indicators
+            th(colspan='2', style='text-align: left; color: #000099') Countries
+            unless spi.noNomenclatureCode
+                th(colspan='2', style='text-align: left; color: #000099') Nomenclatures
+            if spi.partner
+                th(colspan='2', style='text-align: left; color: #000099') Partner
+    tbody
+        each row in spi.data
+            tr
+                td(style='color: #000099')=row.indicator_id
+                td(style='color: #000099')=row.indicator_descr
+                td(style='color: #000099')=row.country_id
+                td(style='color: #000099')=spi.dictionary.countries[row.country_id]
+                unless spi.noNomenclatureCode
+                    td(style='color: #000099')=row.nomenclature_id
+                    td(style='color: #000099')=row.nomenclature_desc
+                if spi.partner
+                    td(style='color: #000099')=row.partner_id
+                    td(style='color: #000099')=spi.dictionary.countries[row.partner_id]
+                each year in spi.years
+                    - var value = Number(row.data[year])
+                    if row.data[year] !== undefined && !isNaN(value)
+                        - value = precision >= 0 ? value.toFixed(precision) : value
+                        td(Formula='=' + value)=value
+                    else
+                        td :
+        tr
+            td Download date:
+            td(style='text-align: left;') #{downloadDate}
+            td Last update date:
+            td(style='text-align: left;') #{spi.update_date}
+

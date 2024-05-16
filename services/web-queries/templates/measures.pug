@@ -1,0 +1,12 @@
+table
+  thead
+    tr
+      th(colspan='14', style='text-align: left;') Last refresh (server time): #{lastRefresh}
+    tr
+      each column in columns
+        th= column.header
+  tbody
+    each measure in measures
+      tr
+        each column in columns
+          td= measure[column.field]

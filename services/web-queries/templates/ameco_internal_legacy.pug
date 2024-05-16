@@ -1,0 +1,45 @@
+mixin tableCell(col, row)
+    if col.formula
+        if row[col.field]
+            td(formula='=+' + row[col.field])=row[col.field]
+        else
+            td(formula='=NA()')
+    else
+        td=row[col.field]
+
+
+<!DOCTYPE html>
+html
+    head
+        meta(charset='UTF-8')
+        title Ameco Internal
+    body
+        table
+            thead
+                tr
+                    if transpose
+                        th=columns[0].label
+                        each row in data
+                            th=row[columns[0].field]
+                    else
+                        each col in columns
+                            th=col.label
+            tbody
+                if transpose
+                    each col, index in columns
+                        if index > 0
+                            tr
+                                td=col.label
+                                each row in data
+                                    +tableCell(col, row)
+                else
+                    each row in data
+                        tr
+                            each col in columns
+                                +tableCell(col, row)
+                tr
+                    td version :
+                    td=version
+                    td last update :
+                    td=lastUpdate
+

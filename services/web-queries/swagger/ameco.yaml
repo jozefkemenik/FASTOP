@@ -1,0 +1,973 @@
+#openapi: 3.0.3
+#info:
+#  title: 'Ameco'
+#  version: 1.0.
+
+tags:
+  - name: ameco public
+  - name: ameco current
+  - name: ameco restricted
+  - name: ameco online
+  - name: ameco metadata
+paths:
+
+  /online:
+    get:
+      tags:
+        - ameco online
+      summary: Get ameco online data
+      description: | 
+        Get ameco online data.  
+        Available on webgate and intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/seriesParam_fpapiParam'
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/useIso2_fpapiParam'
+        - $ref: '#/components/parameters/name_fpapiParam'
+        - $ref: '#/components/parameters/countryName_fpapiParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+        # deprecated params (when fullVariable is provided)
+        - $ref: '#/components/parameters/fullVariable_amecoParam'
+        - $ref: '#/components/parameters/countries_amecoParam'
+        - $ref: '#/components/parameters/defaultCountries_amecoParam'
+        - $ref: '#/components/parameters/years_amecoParam'
+        - $ref: '#/components/parameters/lastyear_amecoParam'
+        - $ref: '#/components/parameters/yearOrder_amecoParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpIqyResponse200'
+
+  /online/iqy:
+    get:
+      tags:
+        - ameco online
+      summary: Ameco online iqy file
+      description: | 
+        Generate ameco online web query file.  
+        Available on webgate and intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/seriesParam_fpapiParam'
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/useIso2_fpapiParam'
+        - $ref: '#/components/parameters/name_fpapiParam'
+        - $ref: '#/components/parameters/countryName_fpapiParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+        # deprecated params (when fullVariable is provided)
+        - $ref: '#/components/parameters/fullVariable_amecoParam'
+        - $ref: '#/components/parameters/countries_amecoParam'
+        - $ref: '#/components/parameters/defaultCountries_amecoParam'
+        - $ref: '#/components/parameters/years_amecoParam'
+        - $ref: '#/components/parameters/lastyear_amecoParam'
+        - $ref: '#/components/parameters/yearOrder_amecoParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpIqyResponse200'
+
+  /public:
+    get:
+      tags:
+        - ameco public
+      summary: Get ameco public (annexed) data
+      description: | 
+        Get ameco public (annexed) data.  
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/seriesParam_fpapiParam'
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/useIso2_fpapiParam'
+        - $ref: '#/components/parameters/name_fpapiParam'
+        - $ref: '#/components/parameters/countryName_fpapiParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+        - $ref: '#/components/parameters/followForecast_fpapiParam'
+        # deprecated params (when fullVariable is provided)
+        - $ref: '#/components/parameters/fullVariable_amecoParam'
+        - $ref: '#/components/parameters/countries_amecoParam'
+        - $ref: '#/components/parameters/defaultCountries_amecoParam'
+        - $ref: '#/components/parameters/years_amecoParam'
+        - $ref: '#/components/parameters/lastyear_amecoParam'
+        - $ref: '#/components/parameters/yearOrder_amecoParam'
+        - $ref: '#/components/parameters/yearOnXAxis_amecoParam'
+        - $ref: '#/components/parameters/countryIso_amecoParam'
+        - $ref: '#/components/parameters/showVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullCode_amecoParam'
+        - $ref: '#/components/parameters/showLabel_amecoParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  /public/iqy:
+    get:
+      tags:
+        - ameco public
+      summary: Ameco public iqy file
+      description: | 
+        Generate ameco public (annexed) web query file.  
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/seriesParam_fpapiParam'
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/useIso2_fpapiParam'
+        - $ref: '#/components/parameters/name_fpapiParam'
+        - $ref: '#/components/parameters/countryName_fpapiParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+        - $ref: '#/components/parameters/followForecast_fpapiParam'
+        # deprecated params (when fullVariable is provided)
+        - $ref: '#/components/parameters/fullVariable_amecoParam'
+        - $ref: '#/components/parameters/countries_amecoParam'
+        - $ref: '#/components/parameters/defaultCountries_amecoParam'
+        - $ref: '#/components/parameters/years_amecoParam'
+        - $ref: '#/components/parameters/lastyear_amecoParam'
+        - $ref: '#/components/parameters/yearOrder_amecoParam'
+        - $ref: '#/components/parameters/yearOnXAxis_amecoParam'
+        - $ref: '#/components/parameters/countryIso_amecoParam'
+        - $ref: '#/components/parameters/showVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullCode_amecoParam'
+        - $ref: '#/components/parameters/showLabel_amecoParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpIqyResponse200'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  ###############################################################
+  # Deprecated ameco public routes - for backward compatibility #
+  ###############################################################
+
+  /annex_series:
+    get:
+      tags:
+        - ameco public
+      summary: Get ameco public data
+      deprecated: true
+      description: |
+        Get ameco public data.  
+        Available only on intragate.  
+        Used only for backward compatibility.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/seriesParam_fpapiParam'
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/useIso2_fpapiParam'
+        - $ref: '#/components/parameters/name_fpapiParam'
+        - $ref: '#/components/parameters/countryName_fpapiParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+        - $ref: '#/components/parameters/followForecast_fpapiParam'
+        # deprecated params (when fullVariable is provided)
+        - $ref: '#/components/parameters/fullVariable_amecoParam'
+        - $ref: '#/components/parameters/countries_amecoParam'
+        - $ref: '#/components/parameters/defaultCountries_amecoParam'
+        - $ref: '#/components/parameters/years_amecoParam'
+        - $ref: '#/components/parameters/lastyear_amecoParam'
+        - $ref: '#/components/parameters/yearOrder_amecoParam'
+        - $ref: '#/components/parameters/yearOnXAxis_amecoParam'
+        - $ref: '#/components/parameters/countryIso_amecoParam'
+        - $ref: '#/components/parameters/showVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullCode_amecoParam'
+        - $ref: '#/components/parameters/showLabel_amecoParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  ###############################################################
+  ###############################################################
+  ###############################################################
+
+  /current:
+    get:
+      tags:
+        - ameco current
+      summary: Get ameco current data
+      description: | 
+        Get ameco current data.  
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/seriesParam_fpapiParam'
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/useIso2_fpapiParam'
+        - $ref: '#/components/parameters/name_fpapiParam'
+        - $ref: '#/components/parameters/countryName_fpapiParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+        - $ref: '#/components/parameters/followForecast_fpapiParam'
+        # deprecated params (when fullVariable is provided)
+        - $ref: '#/components/parameters/fullVariable_amecoParam'
+        - $ref: '#/components/parameters/countries_amecoParam'
+        - $ref: '#/components/parameters/defaultCountries_amecoParam'
+        - $ref: '#/components/parameters/years_amecoParam'
+        - $ref: '#/components/parameters/lastyear_amecoParam'
+        - $ref: '#/components/parameters/yearOrder_amecoParam'
+        - $ref: '#/components/parameters/yearOnXAxis_amecoParam'
+        - $ref: '#/components/parameters/countryIso_amecoParam'
+        - $ref: '#/components/parameters/showVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullCode_amecoParam'
+        - $ref: '#/components/parameters/showLabel_amecoParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  /current/iqy:
+    get:
+      tags:
+        - ameco current
+      summary: Ameco current iqy file
+      description: | 
+        Generate ameco current web query file.  
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/seriesParam_fpapiParam'
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/useIso2_fpapiParam'
+        - $ref: '#/components/parameters/name_fpapiParam'
+        - $ref: '#/components/parameters/countryName_fpapiParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+        - $ref: '#/components/parameters/followForecast_fpapiParam'
+        # deprecated params (when fullVariable is provided)
+        - $ref: '#/components/parameters/fullVariable_amecoParam'
+        - $ref: '#/components/parameters/countries_amecoParam'
+        - $ref: '#/components/parameters/defaultCountries_amecoParam'
+        - $ref: '#/components/parameters/years_amecoParam'
+        - $ref: '#/components/parameters/lastyear_amecoParam'
+        - $ref: '#/components/parameters/yearOrder_amecoParam'
+        - $ref: '#/components/parameters/yearOnXAxis_amecoParam'
+        - $ref: '#/components/parameters/countryIso_amecoParam'
+        - $ref: '#/components/parameters/showVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullCode_amecoParam'
+        - $ref: '#/components/parameters/showLabel_amecoParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpIqyResponse200'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  ################################################################
+  # Deprecated ameco current routes - for backward compatibility #
+  ################################################################
+
+  /:
+    get:
+      tags:
+        - ameco current
+      summary: Get ameco current data
+      deprecated: true
+      description: |
+        Get ameco current data.  
+        Available only on intragate.  
+        Used only for backward compatibility.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/seriesParam_fpapiParam'
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/useIso2_fpapiParam'
+        - $ref: '#/components/parameters/name_fpapiParam'
+        - $ref: '#/components/parameters/countryName_fpapiParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+        - $ref: '#/components/parameters/followForecast_fpapiParam'
+        # deprecated params (when fullVariable is provided)
+        - $ref: '#/components/parameters/fullVariable_amecoParam'
+        - $ref: '#/components/parameters/countries_amecoParam'
+        - $ref: '#/components/parameters/defaultCountries_amecoParam'
+        - $ref: '#/components/parameters/years_amecoParam'
+        - $ref: '#/components/parameters/lastyear_amecoParam'
+        - $ref: '#/components/parameters/yearOrder_amecoParam'
+        - $ref: '#/components/parameters/yearOnXAxis_amecoParam'
+        - $ref: '#/components/parameters/countryIso_amecoParam'
+        - $ref: '#/components/parameters/showVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullCode_amecoParam'
+        - $ref: '#/components/parameters/showLabel_amecoParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  /series:
+    get:
+      tags:
+        - ameco current
+      summary: Get ameco current data
+      deprecated: true
+      description: |
+        Get ameco current data.  
+        Available only on intragate.  
+        Used only for backward compatibility.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/seriesParam_fpapiParam'
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/useIso2_fpapiParam'
+        - $ref: '#/components/parameters/name_fpapiParam'
+        - $ref: '#/components/parameters/countryName_fpapiParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+        - $ref: '#/components/parameters/followForecast_fpapiParam'
+        # deprecated params (when fullVariable is provided)
+        - $ref: '#/components/parameters/fullVariable_amecoParam'
+        - $ref: '#/components/parameters/countries_amecoParam'
+        - $ref: '#/components/parameters/defaultCountries_amecoParam'
+        - $ref: '#/components/parameters/years_amecoParam'
+        - $ref: '#/components/parameters/lastyear_amecoParam'
+        - $ref: '#/components/parameters/yearOrder_amecoParam'
+        - $ref: '#/components/parameters/yearOnXAxis_amecoParam'
+        - $ref: '#/components/parameters/countryIso_amecoParam'
+        - $ref: '#/components/parameters/showVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullCode_amecoParam'
+        - $ref: '#/components/parameters/showLabel_amecoParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  ################################################################
+  ################################################################
+  ################################################################
+
+  /restricted:
+    get:
+      tags:
+        - ameco restricted
+      summary: Get ameco restricted data
+      description: | 
+        Get ameco restricted data.  
+        Available only on intragate.
+      security:
+        - BasicAuth: []
+      parameters:
+        - $ref: '#/components/parameters/seriesParam_fpapiParam'
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/useIso2_fpapiParam'
+        - $ref: '#/components/parameters/name_fpapiParam'
+        - $ref: '#/components/parameters/countryName_fpapiParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+        - $ref: '#/components/parameters/followForecast_fpapiParam'
+        # deprecated params (when fullVariable is provided)
+        - $ref: '#/components/parameters/fullVariable_amecoParam'
+        - $ref: '#/components/parameters/countries_amecoParam'
+        - $ref: '#/components/parameters/defaultCountries_amecoParam'
+        - $ref: '#/components/parameters/years_amecoParam'
+        - $ref: '#/components/parameters/lastyear_amecoParam'
+        - $ref: '#/components/parameters/yearOrder_amecoParam'
+        - $ref: '#/components/parameters/yearOnXAxis_amecoParam'
+        - $ref: '#/components/parameters/countryIso_amecoParam'
+        - $ref: '#/components/parameters/showVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullCode_amecoParam'
+        - $ref: '#/components/parameters/showLabel_amecoParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '403':
+          $ref: '#/components/responses/FpResponse403'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  /restricted/iqy:
+    get:
+      tags:
+        - ameco restricted
+      summary: Ameco restricted iqy file
+      description: | 
+        Generate ameco restricted web query file.  
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/seriesParam_fpapiParam'
+        - $ref: '#/components/parameters/serie_fpapiParam'
+        - $ref: '#/components/parameters/cty_fpapiParam'
+        - $ref: '#/components/parameters/ctyGrp_fpapiParam'
+        - $ref: '#/components/parameters/from_fpapiParam'
+        - $ref: '#/components/parameters/to_fpapiParam'
+        - $ref: '#/components/parameters/freq_fpapiParam'
+        - $ref: '#/components/parameters/null_fpapiParam'
+        - $ref: '#/components/parameters/showRound_fpapiParam'
+        - $ref: '#/components/parameters/showUpdate_fpapiParam'
+        - $ref: '#/components/parameters/sortYears_fpapiParam'
+        - $ref: '#/components/parameters/fullCode_fpapiParam'
+        - $ref: '#/components/parameters/scaleParam_fpapiParam'
+        - $ref: '#/components/parameters/legend_fpapiParam'
+        - $ref: '#/components/parameters/transpose_fpapiParam'
+        - $ref: '#/components/parameters/useIso2_fpapiParam'
+        - $ref: '#/components/parameters/name_fpapiParam'
+        - $ref: '#/components/parameters/countryName_fpapiParam'
+        - $ref: '#/components/parameters/json_fpapiParam'
+        - $ref: '#/components/parameters/followForecast_fpapiParam'
+        # deprecated params (when fullVariable is provided)
+        - $ref: '#/components/parameters/fullVariable_amecoParam'
+        - $ref: '#/components/parameters/countries_amecoParam'
+        - $ref: '#/components/parameters/defaultCountries_amecoParam'
+        - $ref: '#/components/parameters/years_amecoParam'
+        - $ref: '#/components/parameters/lastyear_amecoParam'
+        - $ref: '#/components/parameters/yearOrder_amecoParam'
+        - $ref: '#/components/parameters/yearOnXAxis_amecoParam'
+        - $ref: '#/components/parameters/countryIso_amecoParam'
+        - $ref: '#/components/parameters/showVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullCode_amecoParam'
+        - $ref: '#/components/parameters/showLabel_amecoParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpIqyResponse200'
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+
+  ###################################################################
+  # Deprecated ameco restricted routes - for backward compatibility #
+  ###################################################################
+
+  /restricted_series:
+    get:
+      tags:
+        - ameco restricted
+      summary: Get ameco restricted data
+      description: |
+        Get ameco restricted data.  
+        Available only on intragate.  
+        Used only for backward compatibility.
+      security:
+        - BasicAuth: []
+      parameters:
+        # deprecated params (when fullVariable is provided)
+        - $ref: '#/components/parameters/fullVariable_amecoParam'
+        - $ref: '#/components/parameters/countries_amecoParam'
+        - $ref: '#/components/parameters/defaultCountries_amecoParam'
+        - $ref: '#/components/parameters/years_amecoParam'
+        - $ref: '#/components/parameters/lastyear_amecoParam'
+        - $ref: '#/components/parameters/yearOrder_amecoParam'
+        - $ref: '#/components/parameters/yearOnXAxis_amecoParam'
+        - $ref: '#/components/parameters/countryIso_amecoParam'
+        - $ref: '#/components/parameters/showVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullVariable_amecoParam'
+        - $ref: '#/components/parameters/showFullCode_amecoParam'
+        - $ref: '#/components/parameters/showLabel_amecoParam'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/FpResponse200'
+        '403':
+          description: User not authorized
+        '404':
+          $ref: '#/components/responses/FpResponse404'
+
+  ###################################################################
+  ###################################################################
+  ###################################################################
+
+  /metadata:
+    get:
+      tags:
+        - ameco metadata
+      summary: Ameco metadata information
+      description: |
+        Get dictionary data:
+        * countries
+        * transformations
+        * aggregates
+        * units
+        * indicators' tree  
+        
+        Available on intragate and webgate.
+      security: []
+
+      responses:
+        '200':
+          description: Indicators' tree
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IWQAmecoInternalMetadata'
+
+components:
+  parameters:
+
+    ##########################################################################
+    # Deprecated parameters: for backward compatibility with old php service #
+    ##########################################################################
+    fullVariable_amecoParam:
+      name: fullVariable
+      in: query
+      required: false
+      deprecated: true
+      description: |
+        Full codes (e.g. 1.0.0.0.OVGD) separated with comma "," or plus "+".   
+        Used only for backward compatibility with the old service.  
+        This parameter is incompatible with `series` or `serie`.  
+        If the `fullVariable` is used then only the legacy (deprecated) parameters that are defined below are used.
+      schema:
+        type: string
+
+    countries_amecoParam:
+      name: countries
+      in: query
+      required: false
+      deprecated: true
+      description: |
+        Iso-3 country codes separated with comma "," or plus "+".  
+        Used only for backward compatibility with the old service.  
+        Must be used together with `fullVariable`.
+      schema:
+        type: string
+
+    defaultCountries_amecoParam:
+      name: defaultCountries
+      in: query
+      required: false
+      deprecated: true
+      description: |
+        * `1` - return default list of countries
+        * `0` - return countries provided in **countries** parameter  
+        Used only for backward compatibility with the old service.  
+        Must be used together with `fullVariable`.
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 0
+      allowEmptyValue: true
+
+    years_amecoParam:
+      name: years
+      in: query
+      required: false
+      deprecated: true
+      description: |
+        Years to be returned separated with comma "," or plus "+".   
+        Used only for backward compatibility with the old service.  
+        Must be used together with `fullVariable`.
+      example: 1995,1997,2010
+      schema:
+        type: string
+
+    lastyear_amecoParam:
+      name: Lastyear
+      in: query
+      required: false
+      deprecated: true
+      description: |
+        * `1` - include the last year in the results
+        * `0` - do not include the last year  
+        Used only for backward compatibility with the old service.  
+        Must be used together with `fullVariable`.
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 0
+      allowEmptyValue: true
+
+    yearOrder_amecoParam:
+      name: Yearorder
+      in: query
+      required: false
+      deprecated: true
+      description: |
+        Sort years:  
+        * `ASC` - ascending  
+        * `DESC` - descending  
+        Used only for backward compatibility with the old service.  
+        Must be used together with `fullVariable`.
+      schema:
+        type: string
+        default: DESC
+        enum: [ASC, DESC]
+
+    yearOnXAxis_amecoParam:
+      name: yearOnXAxis
+      in: query
+      required: false
+      deprecated: true
+      description: |
+        * `1` - years in columns
+        * `0` - years in rows (transposed)  
+        Used only for backward compatibility with the old service.  
+        Must be used together with `fullVariable`.
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 1
+      allowEmptyValue: true
+
+    countryIso_amecoParam:
+      name: countryIso
+      in: query
+      required: false
+      deprecated: true
+      description: |
+        * `2` - return country ISO-2 codes
+        * `3` - return country ISO-3 codes
+        Used only for backward compatibility with the old service.  
+        Must be used together with `fullVariable`.
+      schema:
+        type: number
+        enum: [2, 3]
+        default: 2
+      allowEmptyValue: true
+
+    showVariable_amecoParam:
+      name: showVariable
+      in: query
+      required: false
+      deprecated: true
+      description: |
+        **Variable** column:
+        * `1` - show
+        * `0` - hide
+        Used only for backward compatibility with the old service.  
+        Must be used together with `fullVariable`.
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 1
+      allowEmptyValue: true
+
+    showFullVariable_amecoParam:
+      name: showFullVariable
+      in: query
+      required: false
+      deprecated: true
+      description: |
+        **Full Variable** column:
+        * `1` - show
+        * `0` - hide
+        Used only for backward compatibility with the old service.  
+        Must be used together with `fullVariable`.
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 1
+      allowEmptyValue: true
+
+    showFullCode_amecoParam:
+      name: showFullCode
+      in: query
+      required: false
+      deprecated: true
+      description: |
+        **Full Code** column:
+        * `1` - show
+        * `0` - hide
+        Used only for backward compatibility with the old service.  
+        Must be used together with `fullVariable`.
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 1
+      allowEmptyValue: true
+
+    showLabel_amecoParam:
+      name: showLabel
+      in: query
+      required: false
+      deprecated: true
+      description: |
+        **Label** column:
+        * `1` - show
+        * `0` - hide
+        Used only for backward compatibility with the old service.  
+        Must be used together with `fullVariable`.
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 1
+      allowEmptyValue: true
+
+    ##########################################################################
+    ##########################################################################
+    ##########################################################################
+
+  schemas:
+
+    IAmecoMetadataCountry:
+      type: object
+      required:
+        - ctyIso3
+        - ctyIso2
+        - descr
+        - orderBy
+        - isDefault
+      properties:
+        ctyIso3:
+          type: string
+          description: Country ISO-3 code
+          example: BEL
+        ctyIso2:
+          type: string
+          description: Country ISO-2 code
+          example: BE
+        descr:
+          type: string
+          description: Country name
+          example: Belgium
+        orderBy:
+          type: number
+          description: Ordering
+          example: 3
+        isDefault:
+          type: number
+          description: 1 means default ameco country
+          example: 1
+
+    IAmecoMetadataDimension:
+      type: object
+      required:
+        - id
+        - descr
+      properties:
+        id:
+          type: string
+          description: Unique identifier
+          example: 2
+        descr:
+          type: string
+          description: Descriptive text
+          example: Levels (and moving geometric mean for time periods)
+
+    IWQAmecoInternalMetadataTreeNode:
+      type: object
+      required:
+        - code
+        - descr
+        - level
+        - orderBy
+      properties:
+        code:
+          type: string
+          description: Section code for parent nodes, otherwise indicator code
+          example: UVGDR
+        descr:
+          type: string
+          description: Section name for parents nodes, otherwise indicator name
+          example: At current prices, relative to a country or aggregate
+        level:
+          type: number
+          description: Depth in the tree
+          example: 3
+        isLeaf:
+          type: boolean
+          description: Indicates that the current node is the leaf (has no children)
+          example: false
+        orderBy:
+          type: number
+          description: Ameco ordering number
+          example: 601002
+        children:
+          type: array
+          description: Child nodes
+          items:
+            $ref: '#/components/schemas/IWQAmecoInternalMetadataTreeNode'
+
+
+    IWQAmecoInternalMetadata:
+      type: object
+      required:
+        - countries
+        - trn
+        - agg
+        - unit
+        - tree
+      properties:
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/IAmecoMetadataCountry'
+        trn:
+          type: array
+          items:
+            $ref: '#/components/schemas/IAmecoMetadataDimension'
+          example: [
+            {id: "1", descr: "Levels (and moving arith… mean for time periods)"},
+            {id: "2", descr: "Levels (and moving geometric mean for time periods)"},
+          ]
+        agg:
+          type: array
+          items:
+            $ref: '#/components/schemas/IAmecoMetadataDimension'
+          example: [
+            {id: "0", descr: "Standard aggregations (data converted to a common currency and summed)"},
+            {id: "1", descr: "Weighted arithmetic mean of national t/t-1 growth rates, weights t-1 current prices in ECU/EUR"}
+          ]
+        unit:
+          type: array
+          items:
+            $ref: '#/components/schemas/IAmecoMetadataDimension'
+          example: [
+            {id: "40", descr: "JPY"},
+            {id: "300", descr: "Final demand"}
+          ]
+        tree:
+          type: array
+          items:
+            $ref: '#/components/schemas/IWQAmecoInternalMetadataTreeNode'
+          example: [
+            {
+              "code": "1",
+              "descr": "POPULATION AND EMPLOYMENT",
+              "orderBy": 100000,
+              "level": 1,
+              "children": [
+                {
+                  "code": "NPTD.1.0.0.0",
+                  "descr": "Total population (National accounts) [Persons]",
+                  "level": 2,
+                  "orderBy":101002,
+                  "isLeaf":true
+                }
+              ]
+            }
+          ]

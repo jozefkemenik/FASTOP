@@ -1,0 +1,65 @@
+pm2 unregister -name dfm;
+pm2 unregister -name drm;
+pm2 unregister -name dbp;
+pm2 unregister -name scp;
+pm2 unregister -name fgd;
+pm2 unregister -name secunda;
+pm2 unregister -name dashboard;
+pm2 unregister -name stats;
+pm2 unregister -name og;
+pm2 unregister -name cs;
+pm2 unregister -name gateway;
+pm2 unregister -name da;
+pm2 unregister -name ed;
+
+pm2 unregister -name fdms;
+pm2 unregister -name wq;
+pm2 unregister -name fdmsstar;
+pm2 unregister -name task;
+pm2 unregister -name fpapi;
+pm2 unregister -name ns;
+pm2 unregister -name mda;
+
+pm2 unregister -name auxtools;
+pm2 unregister -name addin;
+pm2 unregister -name sum;
+pm2 unregister -name fpadmin;
+pm2 unregister -name ameco;
+pm2 unregister -name dsload;
+pm2 unregister -name cosnap;
+
+
+pm2 register -name dfm -path fastop/scopax/dfm/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"DFM"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 2 -exec_mode cluster -port 3210;
+pm2 register -name drm -path fastop/scopax/drm/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"DRM"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 2 -exec_mode cluster -port 3220;
+pm2 register -name dbp -path fastop/scopax/dbp/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"DBP"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 2 -exec_mode cluster -port 3230;
+pm2 register -name scp -path fastop/scopax/scp/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"SCP"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 2 -exec_mode cluster -port 3240;
+pm2 register -name fgd -path fastop/scopax/fgd/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"FGD"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -env "FGD_DB_PASSWORD:\"$FGD_DB_PASSWORD\"" -env "FASTOP_DB:\"$FASTOP_DB\"" -instances 2 -exec_mode cluster -port 3250;
+
+pm2 register -name da -path fastop/scopax/data-access/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"da"' -env 'FASTOP:HOME+"fastop"' -env 'TNS_ADMIN:HOME+"fastop/oracle"' -env "FASTOP_DB:\"$FASTOP_DB\"" -env "FASTOP_DB_PASSWORD:\"$FASTOP_DB_PASSWORD\"" -env 'UV_THREADPOOL_SIZE:10' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 2 -exec_mode cluster -port 3101;
+pm2 register -name dashboard -path fastop/scopax/dashboard/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"dashboard"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 2 -exec_mode cluster -port 3103;
+pm2 register -name og -path fastop/scopax/output-gaps/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"outputGap"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 2 -exec_mode cluster -port 3104;
+pm2 register -name cs -path fastop/scopax/country-status/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"ctyStatus"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 2 -exec_mode cluster -port 3105;
+pm2 register -name wq -path fastop/scopax/web-queries/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"webQuery"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -env "AMECO_ONLINE_PUBLIC_URL:\"$AMECO_ONLINE_PUBLIC_URL\"" -env "AMECO_APIGW_ENDPOINT:\"$AMECO_APIGW_ENDPOINT\"" -env "AMECO_CONSUMER_KEY:\"$AMECO_CONSUMER_KEY\"" -env "AMECO_CONSUMER_SECRET:\"$AMECO_CONSUMER_SECRET\"" -instances 2 -exec_mode cluster -port 3106;
+pm2 register -name secunda -path fastop/scopax/secunda/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"secunda"' -env 'FASTOP:HOME+"fastop"' -env "SECUNDA_SERVICE_URL:\"$SECUNDA_SERVICE_URL\"" -env "SECUNDA_USER_PASSWORD:\'$SECUNDA_USER_PASSWORD\'" -env "SECUNDA_UM:\'$SECUNDA_UM\'" -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -env "SECUNDA_APIGW_ENDPOINT:\"$SECUNDA_APIGW_ENDPOINT\"" -env "APIGW_ENDPOINT:\"$APIGW_ENDPOINT\"" -env "CONSUMER_KEY:\"$CONSUMER_KEY\"" -env "CONSUMER_SECRET:\"$CONSUMER_SECRET\"" -instances 2 -exec_mode cluster -port 3107;
+pm2 register -name ed -path fastop/scopax/external-data/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"externalData"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -env "HTTP_PROXY:\"$HTTP_PROXY\"" -env "HTTPS_PROXY:\"$HTTPS_PROXY\"" -env 'TNS_ADMIN:HOME+"fastop/oracle"' -env "SPI_DB:\"$SPI_DB\"" -env "SPI_DB_PASSWORD:\"$SPI_DB_PASSWORD\"" -env "AMECO_DB_HOST:\"$AMECO_DB_HOST\"" -env "AMECO_DB_USER:\"$AMECO_DB_USER\"" -env "AMECO_DB_PASSWORD:\"$AMECO_DB_PASSWORD\"" -env "AMECO_ONLINE_DB_NAME:\"$AMECO_ONLINE_DB_NAME\"" -env "AMECO_ONLINE_DB_HOST:\"$AMECO_ONLINE_DB_HOST\"" -env "AMECO_ONLINE_DB_PASSWORD:\"$AMECO_ONLINE_DB_PASSWORD\"" -instances 2 -exec_mode cluster -port 3108;
+pm2 register -name stats -path fastop/scopax/stats/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"stats"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 2 -exec_mode cluster -port 3109;
+
+pm2 register -name gateway -path fastop/scopax/gateway/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"gateway"' -env 'FASTOP:HOME+"fastop"' -env 'NODE_EXTRA_CA_CERTS:HOME+"fastop/scopax/gateway/config/ec.pem"' -env "REDIS_PASSPHRASE:\"$REDIS_PASSPHRASE\"" -env "FASTOP_SECRET:\"$FASTOP_SECRET\"" -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -env "FASTOP_JWT_SECRET:\"$FASTOP_JWT_SECRET\"" -instances 2 -exec_mode cluster -port 3099; #port 3100 for webgate
+
+# intragate only
+pm2 register -name sum -path fastop/scopax/sum/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"sum"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -env 'TNS_ADMIN:HOME+"fastop/oracle"' -env "SECUNDA_DB:\"$SECUNDA_DB\"" -env "SECUNDA_DB_PASSWORD:\"$SECUNDA_DB_PASSWORD\"" -env "LDAP_PORT:\"$LDAP_PORT\"" -env "LDAP_PASS:\"$LDAP_PASS\"" -env "LDAP_HOST:\"$LDAP_HOST\"" -env "LDAP_USER:\"$LDAP_USER\"" -env "LDAP_BASE:\"$LDAP_BASE\""   -env 'UV_THREADPOOL_SIZE:3' -instances 1 -exec_mode fork -port 3102;
+pm2 register -name task -path fastop/scopax/task/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"task"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 2 -exec_mode cluster -port 3110;
+pm2 register -name fpapi -path fastop/scopax/fpapi/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"fpapi"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 1 -exec_mode fork -port 3111;
+pm2 register -name ns -path fastop/scopax/notification/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"ns"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -env "MAILBOX_HOST:\"$MAILBOX_HOST\"" -env "MAILBOX_PORT:\"$MAILBOX_PORT\"" -env "MAILBOX_SENDER:\"$MAILBOX_SENDER\"" -env "CNS_ENDPOINT:\"$CNS_ENDPOINT\"" -env "CNS_AUTH:\"$CNS_AUTH\"" -instances 1 -exec_mode fork -port 3112;
+pm2 register -name fdms -path fastop/scopax/fdms/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"FDMS"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -env "EXCEL_SERVICE:\"$EXCEL_SERVICE\"" -instances 2 -exec_mode cluster -port 3260;
+pm2 register -name auxtools -path fastop/scopax/auxtools/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"auxtools"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 2 -exec_mode cluster -port 3270;
+pm2 register -name addin -path fastop/scopax/addin/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"addin"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 2 -exec_mode cluster -port 3271;
+pm2 register -name fpadmin -path fastop/scopax/fpadmin/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"fpadmin"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 1 -exec_mode fork -port 3272;
+pm2 register -name dsload -path fastop/scopax/dsload/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"dsload"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 1 -exec_mode fork -port 3273;
+pm2 register -name cosnap -path fastop/scopax/cosnap/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"cosnap"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -env "COSNAP_MONGO_DB:\"$COSNAP_MONGO_DB\"" -instances 1 -exec_mode fork -port 3274;
+pm2 register -name ameco -path fastop/scopax/ameco/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"ameco"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -instances 2 -exec_mode cluster -port 3280;
+pm2 register -name mda -path fastop/scopax/mongo-data-access/dist -script index.js -env "NODE_ENV:\"$NODE_ENV\"" -env 'DEBUG:"mda"' -env 'FASTOP:HOME+"fastop"' -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\"" -env "FASTOP_MONGO_DB:\"$FASTOP_MONGO_DB\"" -instances 2 -exec_mode cluster -port 3113;
+
+
+
+# pm2 register -name fdmsstar -path fastop/python/fdmsstar -script start-fdmsstar.sh -instances 1 -exec_mode fork -port 3503 -env 'FASTOP:HOME+"fastop"' -env "LD_LIBRARY_PATH:\"LD_LIBRARY_PATH\"" -env "FASTOP_API_KEY:\"$FASTOP_API_KEY\""

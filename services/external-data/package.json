@@ -1,0 +1,16 @@
+{
+  "name": "external-data",
+  "version": "0.0.0",
+  "description": "External-data service",
+  "main": "./dist/index.js",
+  "scripts": {
+    "prebuild": "../node_modules/.bin/eslint .",
+    "build": "../node_modules/.bin/tsc",
+    "test": "../node_modules/.bin/mocha --require ts-node/register test/**/*.ts",
+    "coverage": "nyc npm run test",
+    "start": "../node_modules/.bin/nodemon -L ./dist/index.js --delay 2",
+    "prod": "node ."
+  },
+  "author": "",
+  "license": "ISC"
+}

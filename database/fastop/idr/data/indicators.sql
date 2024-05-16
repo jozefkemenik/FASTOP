@@ -1,0 +1,5 @@
+/* Formatted on 12/11/2019 18:11:38 (QP5 v5.252.13127.32847) */
+SET DEFINE OFF;
+
+INSERT INTO indicators
+   SELECT * FROM indicators@SCOPAX WHERE INDICATOR_ID NOT LIKE '%.merge';

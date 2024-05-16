@@ -1,0 +1,21 @@
+/* Formatted on 26-05-2020 11:55:32 (QP5 v5.313) */
+DROP TABLE CYCLICAL_ADJUSTMENTS CASCADE CONSTRAINTS;
+
+CREATE TABLE CYCLICAL_ADJUSTMENTS(
+   ROUND_SID                     NUMBER(8)
+                                 NOT NULL
+                                 CONSTRAINT CYCLICAL_ADJUSTMENTS_ROUND_FK REFERENCES ROUNDS(ROUND_SID)
+ , COUNTRY_ID                    VARCHAR2(5 BYTE)
+                                 NOT NULL
+                                 CONSTRAINT CYCLICAL_ADJUSTMENTS_CTY_FK REFERENCES GEO_AREAS(GEO_AREA_ID)
+ , CYCLICAL_ADJUSTMENT_TYPE_SID  NUMBER(4)
+                                 NOT NULL
+                                 CONSTRAINT CYCLICAL_ADJUSTMENTS_TYPE_FK
+                                    REFERENCES CYCLICAL_ADJUSTMENT_TYPES(CYCLICAL_ADJUSTMENT_TYPE_SID)
+                                       ON DELETE CASCADE
+ , START_YEAR                    NUMBER(4) NOT NULL
+ , VECTOR                        VARCHAR2(4000 BYTE) NOT NULL
+ , CONSTRAINT CYCLICAL_ADJUSTMENTS_UNQ UNIQUE
+      (ROUND_SID, COUNTRY_ID, CYCLICAL_ADJUSTMENT_TYPE_SID)
+);
+/

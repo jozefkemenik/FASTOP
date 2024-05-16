@@ -1,0 +1,21 @@
+/* Formatted on 11/28/2019 17:58:41 (QP5 v5.252.13127.32847) */
+DROP TABLE ST_CTY_STATUS_CHANGES;
+
+CREATE TABLE ST_CTY_STATUS_CHANGES
+(
+   ROUND_SID              NUMBER (8)
+                             NOT NULL
+                             CONSTRAINT ST_CTY_ST_CHANGES_ROUND_FK
+                                 REFERENCES ROUNDS (ROUND_SID)
+,  COUNTRY_ID             VARCHAR2 (4)
+                             NOT NULL
+                             CONSTRAINT ST_CTY_ST_CHANGES_COUNTRY_FK
+                                 REFERENCES GEO_AREAS (GEO_AREA_ID)
+,  FIRST_INPUT_DATE       DATE
+,  LAST_INPUT_DATE        DATE
+,  LAST_SUBMIT_DATE       DATE
+,  LAST_VALIDATION_DATE   DATE
+,  LAST_ARCHIVING_DATE    DATE
+,  OUTPUT_GAP_DATE        DATE
+,  CONSTRAINT ST_CTY_STATUS_CHANGES_UNQ UNIQUE (ROUND_SID, COUNTRY_ID)
+)

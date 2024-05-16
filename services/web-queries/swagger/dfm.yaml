@@ -1,0 +1,202 @@
+#openapi: 3.0.3
+#info:
+#  title: 'DFM'
+#  version: 1.0.0
+
+tags:
+  - name: measures
+  - name: transfer-matrix
+  - name: impact
+paths:
+
+  /measures:
+    get:
+      tags:
+        - measures
+      summary: DFM measures
+      description: |
+        Get DFM measures.          
+        Available only on intragate.
+      security:
+        - BasicAuth: []
+      parameters:
+        - $ref: '#/components/parameters/countryId_measuresParam'
+        - $ref: '#/components/parameters/gdp_measuresParam'
+        - allOf:
+          - $ref: '#/components/parameters/roundSid_ArchParam'
+          - description: | 
+              Round sid.  
+              Ignored when `storageId` is provided - current round is used instead.
+        - allOf:
+            - $ref: '#/components/parameters/storageSid_ArchParam'
+            - description: |
+                Storage sid.  
+                Ignored when `storageId` is provided.
+        - allOf:
+          - $ref: '#/components/parameters/custTextSid_ArchParam'
+          - description: |
+              Custom round sid.  
+              Ignored when `storageId` is provided - current round is used instead.
+        - allOf:
+          - $ref: '#/components/parameters/storageRound_ArchParam'
+          - name: storageId
+          - example: FINAL
+
+      responses:
+        '200':
+          description: DFM measures in html table
+          content:
+            text/html:
+              schema:
+                type: string
+
+
+  /transferMatrix/{countryId}:
+    get:
+      tags:
+        - transfer-matrix
+      summary: DFM transfer matrix
+      description: |
+        Get DFM country transfer matrix.          
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/countryIdPathParam'
+
+      responses:
+        '200':
+          description: DFM transfer matrix in html table
+          content:
+            text/html:
+              schema:
+                type: string
+
+
+  /additionalImpact/{countryId}:
+    get:
+      tags:
+        - impact
+      summary: DFM additional impact
+      description: |
+        Get DFM country additional impact.          
+        Available only on intragate.
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/countryIdPathParam'
+
+      responses:
+        '200':
+          description: DFM additional impact in html table
+          content:
+            text/html:
+              schema:
+                type: string
+
+
+  /impact:
+    get:
+      tags:
+        - impact
+      summary: DFM impact
+      description: |
+        Get DFM country additional impact.          
+        Available only on intragate.
+      security:
+        - BasicAuth: []
+      parameters:
+        - allOf:
+          - $ref: '#/components/parameters/countryId_measuresParam'
+          - description: | 
+              ISO-2 country code.  
+              Returned are only those countries for which user has access.
+
+        - name: aggregationType
+          in: query
+          required: true
+          description: | 
+            Aggregate by:
+            * `ESA` - ESA code
+            * `OO` - One-off
+          schema:
+            type: string
+            enum: [ESA,OO]
+            default: ESA
+
+        - name: oneOff
+          in: query
+          required: false
+          description: |
+            One-off flag.  
+            If `aggregationType` is `OO` then it's forced to 1.
+          schema:
+            type: number
+            enum: [0,1]
+          allowEmptyValue: true
+
+        - name: isEuFunded
+          in: query
+          required: false
+          description: | 
+            Is EU-funded flag.  
+            Set to `1` when `euFundedIds` is not empty.
+          schema:
+            type: number
+            enum: [0,1]
+            default: 1
+
+        - name: euFundedIds
+          in: query
+          required: false
+          description: | 
+            Comma separated list of EU-funded ids.  
+            If not empty then by default `isEuFunded` is set to 1,  
+            otherwise is `isEuFunded` is not set then `euFundedIds` becomes: [2]
+          schema:
+            type: string
+          allowEmptyValue: true
+
+        - name: totalImpact
+          in: query
+          required: false
+          description: Total impact flag
+          schema:
+            type: number
+            enum: [0,1]
+          allowEmptyValue: true
+
+        - name: baseYear
+          in: query
+          required: false
+          description: Base year
+          schema:
+            type: number
+
+        - name: isLight
+          in: query
+          required: false
+          description: If `isLight` then return only code, description and values columns
+          schema:
+            type: number
+            enum: [0,1]
+            default: 0
+          allowEmptyValue: true
+
+      responses:
+        '200':
+          description: DFM impact in html table
+          content:
+            text/html:
+              schema:
+                type: string
+
+components:
+  parameters:
+
+    countryIdPathParam:
+      name: countryId
+      in: path
+      required: true
+      description: ISO-2 country code
+      schema:
+        type: string
+      example: FR

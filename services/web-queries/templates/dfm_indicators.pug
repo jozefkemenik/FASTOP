@@ -1,0 +1,18 @@
+table
+  thead
+    tr
+      th(colspan='14', style='text-align: left;') Country: #{countryId} - Scale: #{scale} - Last refresh (server time): #{lastRefresh}
+    tr
+      th(style='width: 140px')=firstColumnTitle
+      th(style='width: 650px') Description
+      - var i = 0
+        while i < yearsCount
+          th=(startYear + i++)
+  tbody
+    each indicator in indicators
+      tr
+        td=indicator.indicatorId
+        td=indicator.descr
+        each value in indicator.vector
+          td= value
+

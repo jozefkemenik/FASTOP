@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  gateway:
+    container_name: gateway
+    image: ecfin/gateway:0.0
+    environment:
+      - NODE_EXTRA_CA_CERTS=/workspace/code/gateway/config/ec.pem
+    ports:
+      - "3100:3100"
+      - "3443:3443"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/gateway
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  um:
+    container_name: um
+    image: ecfin/um:0.0
+    ports:
+      - "3000:3000"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/um
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  da:
+    container_name: da
+    image: ecfin/da:0.0
+    ports:
+      - "3101:3101"
+    networks:
+      - scopax-network
+    tty: true
+    stdin_open: true
+    working_dir: /workspace/code/data-access
+    entrypoint:
+      - npm
+      - run
+      - prod
+
+  redis:
+    container_name: redis
+    image: redis
+    networks:
+      - scopax-network
+
+networks:
+  scopax-network:
+    driver: bridge

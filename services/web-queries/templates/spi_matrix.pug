@@ -1,0 +1,35 @@
+table
+    thead
+        tr
+            th(colspan='5' style='text-align: left;') #{pageTitle}
+        tr
+            th(colspan='4' rowspan='2' style='text-align: left; color: #000099') Industries
+            each industry in spi.industries
+                td(style='text-align: left; color: #000099')=industry
+        tr
+            each industry in spi.industries
+                td(style='text-align: left; color: #000099')=spi.dictionary.industries[industry]
+        tr
+            th(style='text-align: left; color: #000099') Countries
+            th(style='text-align: left; color: #000099') Years
+            th(colspan='2' style='text-align: left; color: #000099') Products
+    tbody
+         each row in spi.data
+             tr
+                 td(style='color: #000099')=row.country_id
+                 td(style='color: #000099')=row.year
+                 td(style='color: #000099')=row.product
+                 td(style='color: #000099')=spi.dictionary.products[row.product]
+                 each industry in spi.industries
+                    - var value = Number(row.values[industry])
+                     if row.values[industry] !== 'undefined' && !isNaN(value)
+                        - value = precision >= 0 ? value.toFixed(precision) : value
+                        td(Formula='=' + value)=value
+                     else
+                        td :
+         tr
+             td Download date:
+             td(style='text-align: left;') #{downloadDate}
+             td Last update date:
+             td(style='text-align: left;') #{spi.update_date}
+

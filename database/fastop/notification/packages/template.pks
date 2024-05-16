@@ -1,0 +1,6 @@
+CREATE OR REPLACE PACKAGE NOTIFICATION_TEMPLATE
+AS
+   PROCEDURE getTemplate(p_template_id   IN      VARCHAR2
+                       , o_cur               OUT SYS_REFCURSOR);
+END NOTIFICATION_TEMPLATE;
+/

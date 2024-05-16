@@ -1,0 +1,299 @@
+components:
+  parameters:
+    
+    seriesParam_fpapiParam:
+      name: series
+      in: query
+      required: false
+      description: |
+        Indicator codes (e.g. OVGD.1.0.0.0) separated with comma "," or plus "+".  
+        **Series** parameter allows also to run transformations:
+        * add: add two indicators, e.g.  
+          *series=add(ASGH.1.0.0.0,AVGDGP.1.0.0.0))*
+        * minus: substract two indicators, e.g.  
+          *series=minus(ASGH.1.0.0.0,AVGDGP.1.0.0.0)
+        * convert: change frequency, e.g. convert quarterly data into annual  
+          *series=convert(CBGS.1.0.0.0,Q,A)*
+        * pct: percentage change, e.g.  
+          *series=pct(ASGH.1.0.0.0)*
+
+      example: NPTD.1.0.0.0,UTCGC.1.0.319.0
+      schema:
+        type: string
+
+    serie_fpapiParam:
+      name: serie
+      in: query
+      required: false
+      description: |
+        Single full serie code: <country_code>.<indicator_code>.<frequency>, e.g. FR.OCPH.12.1.0.0.Q.  
+        If **serie** is present then **series** parameter is ignored.
+      schema:
+        type: string
+
+    cty_fpapiParam:
+      name: cty
+      in: query
+      required: false
+      description: Comma separated 2-letter or 3-letter iso country codes.
+      example: PL,BE,FR
+      schema:
+        type: string
+
+    ctyGrp_fpapiParam:
+      name: cty_grp
+      in: query
+      required: false
+      description: |
+        Country group code, e.g. EU, EU27. 
+        If ***cty*** is provided then ***cty_grp*** is ignored.
+      schema:
+        type: string
+
+    from_fpapiParam:
+      name: from
+      in: query
+      required: false
+      description: First year of the series to be retrieved
+      schema:
+        type: number
+
+    to_fpapiParam:
+      name: to
+      in: query
+      required: false
+      description: Last year of the series to be retrieved
+      schema:
+        type: number
+
+    freq_fpapiParam:
+      name: freq
+      in: query
+      required: false
+      description: |
+        Frequency of the data:
+        * `M` - monthy
+        * `Q` - quarterly
+        * `A` - annual
+      schema:
+        type: string
+        default: A
+        enum: [M, Q, A]
+
+    null_fpapiParam:
+      name: "null"
+      in: query
+      required: false
+      description: Value to return when for missing data.
+      example: N/A
+      schema:
+        type: string
+
+    showRound_fpapiParam:
+      name: show_round
+      in: query
+      required: false
+      example: 1
+      description: If present in the query then the round and storage information will be returned.
+      schema:
+        type: string
+      allowEmptyValue: true
+
+    showUpdate_fpapiParam:
+      name: show_update
+      in: query
+      required: false
+      example: 1
+      description: If present in the query then the last update date for each indicator will be returned.
+      schema:
+        type: string
+      allowEmptyValue: true
+
+    sortYears_fpapiParam:
+      name: sort_years
+      in: query
+      required: false
+      description: |
+        Sort years:  
+        * `ASC` - ascending  
+        * `DESC` - descending
+      schema:
+        type: string
+        default: ASC
+        enum: [ASC, DESC]
+
+    fullCode_fpapiParam:
+      name: full_code
+      in: query
+      required: false
+      description: |
+        ***Full code*** column: 
+        * `1` - show
+        * `0` - hide
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 0
+      allowEmptyValue: true
+
+    scaleParam_fpapiParam:
+      name: scale
+      in: query
+      required: false
+      description: |
+        ***Scale*** column:
+        * `1` - show
+        * `0` - hide
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 1
+      allowEmptyValue: true
+
+    name_fpapiParam:
+      name: name
+      in: query
+      required: false
+      description: |
+        ***Name*** column:
+        * `1` - show
+        * `0` - hide
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 1
+      allowEmptyValue: true
+
+    countryName_fpapiParam:
+      name: country_name
+      in: query
+      required: false
+      description: |
+        ***Country name*** column:
+        * `1` - show
+        * `0` - hide
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 1
+      allowEmptyValue: true
+
+    legend_fpapiParam:
+      name: legend
+      in: query
+      required: false
+      description: |
+        Legend:
+        * `2` - display at the bottom
+        * `1` - display at the top
+        * `0` - hide
+      schema:
+        type: number
+        enum: [0, 1, 2]
+        default: 1
+      allowEmptyValue: true
+
+    transpose_fpapiParam:
+      name: transpose
+      in: query
+      required: false
+      description: |
+        * `1` - show years in columns
+        * `0` - show years in rows
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 0
+      allowEmptyValue: true
+
+    followForecast_fpapiParam:
+      name: follow_forecast
+      in: query
+      required: false
+      description: |
+        * `1` - when requesting restricted data return current data if inside the forecast period
+        * `0` - always return restricted data
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 0
+      allowEmptyValue: true
+
+    useIso2_fpapiParam:
+      name: useIso2
+      in: query
+      required: false
+      description: |
+        * `1` - return country codes in ISO-2 (2-letter codes)
+        * `0` - return country codes in ISO-3 (3-letter codes)
+      schema:
+        type: number
+        enum: [0, 1]
+        default: 0
+      allowEmptyValue: true
+
+    json_fpapiParam:
+      name: json
+      in: query
+      required: false
+      description: If the parameter is present then the result is returned as json.
+      schema:
+        type: string
+      allowEmptyValue: true
+
+  schemas:
+    FpColumn:
+      type: object
+      properties:
+        label:
+          type: string
+        field:
+          type: string
+        observation:
+          type: boolean
+          nullable: true
+
+    FpData:
+      type: object
+      description: key-value map where the key is the field defined in  **columns**
+      example: { "freq": "A", "country": "PL", "1960": 233.23 }
+
+    FpResult:
+      type: object
+      properties:
+        columns:
+          type: array
+          example: [ { "label": "Country", "field": "country"}, { "label": "Frequency", "field": "freq"}, {"label": "1960", "field": "1960", observation: true}]
+          items:
+            $ref: '#/components/schemas/FpColumn'
+        data:
+          type: array
+          example: [ { "country": "PL", "freq": "A", "1960": 1287.232}, { "country": "BE", "freq": "A", "1960": 765.23}]
+          items:
+            $ref: '#/components/schemas/FpData'
+
+  responses:
+    FpResponse200:
+      description: Html table
+      content:
+        text/html:
+          schema:
+            type: string
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FpResult'
+
+    FpIqyResponse200:
+      description: Iqy (excel web-query) file
+      content:
+        text/plain:
+          schema:
+            type: string
+            format: binary
+
+    FpResponse404:
+      description: Invalid request (when intragate only service is accessed via webgate)
+
+    FpResponse403:
+      description: User not authorized
+

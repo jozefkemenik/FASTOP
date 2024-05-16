@@ -1,0 +1,20 @@
+/* Formatted on 12/2/2019 13:59:17 (QP5 v5.252.13127.32847) */
+DROP TABLE MN_PERMISSIONS;
+
+CREATE TABLE MN_PERMISSIONS
+(
+   MENU_REPO_SID         NUMBER (8)
+                            NOT NULL
+                            CONSTRAINT MN_MENU_PERMISSIONS_MENU_FK
+                                REFERENCES MN_MENU_REPO (MENU_REPO_SID)
+,  USER_GROUP_SID        NUMBER (8)
+                            NOT NULL
+                           CONSTRAINT MN_MENU_PERMISSIONS_UG_FK
+                               REFERENCES SECUNDA_ROLES (ROLE_SID)
+,  PERMISSION_TYPE_SID   NUMBER (2)
+                            NOT NULL
+                            CONSTRAINT MN_MENU_PERMISSIONS_PT_FK
+                               REFERENCES MN_PERMISSION_TYPES (PERMISSION_TYPE_SID)
+,  CONSTRAINT MN_MENU_PERMISSIONS_UNQ UNIQUE
+      (MENU_REPO_SID, USER_GROUP_SID, PERMISSION_TYPE_SID)
+);

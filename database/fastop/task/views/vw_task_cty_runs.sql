@@ -1,0 +1,23 @@
+CREATE OR REPLACE FORCE VIEW VW_TASK_CTY_RUNS
+AS
+    SELECT T.TASK_SID
+         , T.TASK_ID
+         , T.DESCR AS TASK_DESCR
+         , C.COUNTRY_ID
+         , C.ROUND_SID
+         , C.STORAGE_SID
+         , R.TASK_RUN_SID
+         , R.START_RUN
+         , R.END_RUN
+         , R.ALL_STEPS
+         , R.STEPS
+         , R.ALL_PREP_STEPS
+         , R.PREP_STEPS
+         , R.USER_RUN
+         , S.TASK_STATUS_SID
+         , S.TASK_STATUS_ID
+         , S.DESCR AS STATUS_DESCR
+      FROM TASKS T
+           JOIN TASK_COUNTRIES C ON C.TASK_SID = T.TASK_SID
+           JOIN TASK_RUNS R ON R.TASK_RUN_SID = C.TASK_RUN_SID
+           JOIN TASK_STATUSES S ON S.TASK_STATUS_SID = R.TASK_STATUS_SID;

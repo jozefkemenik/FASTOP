@@ -1,0 +1,25 @@
+SET DEFINE OFF;
+
+INSERT INTO EER_INDICATOR_CODES(INDICATOR_ID, DESCR)
+  VALUES('XNU.1.0.30.0', 'Exchange rates');
+
+INSERT INTO EER_INDICATOR_CODES(INDICATOR_ID, DESCR)
+  VALUES('PVGD.3.1.30.0', 'Price deflator gross domestic product');
+
+INSERT INTO EER_INDICATOR_CODES(INDICATOR_ID, DESCR)
+  VALUES('PLCD.3.1.30.0', 'Nominal unit labour costs');
+
+INSERT INTO EER_INDICATOR_CODES(INDICATOR_ID, DESCR)
+  VALUES('ZCPIH.1.0.0.0', 'Harmonised consumer price index (All-items)');
+
+INSERT INTO EER_INDICATOR_CODES(INDICATOR_ID, DESCR)
+  VALUES('PXGS.3.1.30.0', 'Price deflator exports of goods and services');
+
+INSERT INTO EER_INDICATOR_CODES(INDICATOR_ID, DESCR)
+  VALUES('NEER', 'Nominal Effective Exchange Rate');
+
+INSERT INTO EER_INDICATOR_CODES(INDICATOR_ID, DESCR)
+  VALUES('REER', 'Real Effective Exchange Rate');
+
+/
+COMMIT;

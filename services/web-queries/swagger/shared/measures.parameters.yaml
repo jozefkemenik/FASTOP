@@ -1,0 +1,20 @@
+components:
+  parameters:
+
+    countryId_measuresParam:
+      name: countryId
+      in: query
+      required: true
+      description: ISO-2 country code
+      schema:
+        type: string
+      example: BE
+
+    gdp_measuresParam:
+      name: gdp
+      in: query
+      required: false
+      description: GDP flag
+      schema:
+        type: boolean
+      allowEmptyValue: true
